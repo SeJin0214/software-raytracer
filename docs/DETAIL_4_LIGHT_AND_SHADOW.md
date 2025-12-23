@@ -31,7 +31,7 @@ https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b35
 https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/header/light.h#L29-L37
 
   albedo는 물체가 빛을 반사하는 정도를 나타내는 척도이며, 두 조명 모두 albedo 연산을 추가로 해줬습니다.  
-  https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/header/shadow.h#L44-L51  
+  https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/header/shadow.h#L49-57
   
 </details>
 <details><summary>specular description</summary>
@@ -52,6 +52,7 @@ https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b35
 ### 참고 자료
 
 [한정현 컴퓨터그래픽스 9장 라이팅](https://www.youtube.com/watch?v=_uIjVpAM9l8&list=PLYEC1V9tJOl03WLDoUEKbiYW_Xt4W6LTl&index=10)
+
 
 
 
