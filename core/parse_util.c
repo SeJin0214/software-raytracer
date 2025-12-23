@@ -13,33 +13,24 @@
 #include "libft.h"
 #include "parse.h"
 
-bool	try_parse_vector3(char* attribute, t_vector3* out_result)
+bool	try_parse_vector3(const char* attribute, t_vector3* out_result)
 {
-	char	**temp;
-	bool	is_succeed_x;
-	bool	is_succeed_y;
-	bool	is_succeed_z;
-
-	temp = ft_split(attribute, ',');
-	is_succeed_x = try_atof(temp[0], &out_result->x);
-	is_succeed_y = try_atof(temp[1], &out_result->y);
-	is_succeed_z = try_atof(temp[2], &out_result->z);
+	char** temp = ft_split(attribute, ',');
+	bool is_succeed_x = try_atof(temp[0], &out_result->x);
+	bool is_succeed_y = try_atof(temp[1], &out_result->y);
+	bool is_succeed_z = try_atof(temp[2], &out_result->z);
 	clear_words(temp);
 	return (is_succeed_x && is_succeed_y && is_succeed_z);
 }
 
-bool	try_parse_color(char* attribute, t_ivector3 *out_result)
+bool	try_parse_color(const char* attribute, t_ivector3 *out_result)
 {
-	char		**temp;
-	bool		is_succeed_r;
-	bool		is_succeed_g;
-	bool		is_succeed_b;
-
-	temp = ft_split(attribute, ',');
-	is_succeed_r = try_atoi(temp[0], &out_result->x);
-	is_succeed_g = try_atoi(temp[1], &out_result->y);
-	is_succeed_b = try_atoi(temp[2], &out_result->z);
+	char** temp = ft_split(attribute, ',');
+	bool is_succeed_r = try_atoi(temp[0], &out_result->x);
+	bool is_succeed_g = try_atoi(temp[1], &out_result->y);
+	bool is_succeed_b = try_atoi(temp[2], &out_result->z);
 	clear_words(temp);
+	
 	if (is_succeed_r == false || is_succeed_g == false \
 	|| is_succeed_b == false || is_invalid_colors(*out_result))
 	{

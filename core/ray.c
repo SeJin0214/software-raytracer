@@ -13,6 +13,5 @@
 #include "ray.h"
 #include "vector.h"
 
-extern inline t_ray		get_ray(const t_vector3 origin, \
-const t_vector3 direction);
+extern inline t_ray		get_ray(const t_vector3 origin, const t_vector3 direction);
 extern inline t_vector3	get_point_in_ray(const t_ray ray, const float t);

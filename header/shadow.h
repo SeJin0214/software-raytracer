@@ -18,28 +18,30 @@
 inline bool	is_shadowed_surface(const t_world* world, const t_light light, \
 const t_vector3 surface, void* object)
 {
-	const t_ray		light_ray = get_ray(light.coordinates, \
-	normalize_vector3(subtract_vector3(surface, light.coordinates)));
-	t_hit_record	hit_record;
-	t_solid_shape	**shape;
-	int				i;
-	const t_vector3	surface_to_light = \
-	subtract_vector3(light.coordinates, surface);
+	const t_ray		light_ray = get_ray(light.coordinates, normalize_vector3(subtract_vector3(surface, light.coordinates)));
+	const t_vector3	surface_to_light = normalize_vector3(subtract_vector3(light.coordinates, surface));
+	const float surface_to_light_length = get_length_squared(subtract_vector3(light.coordinates, add_vector3(surface, surface_to_light)));
+	t_hit_record hit_record = get_hit_record();
 
-	i = -1;
-	hit_record = get_hit_record();
-	while ((size_t)++i < world->solid_shapes.count)
+	size_t i = 0;
+	while (i < world->solid_shapes.count)
 	{
-		shape = get_element_or_null_in_list(\
-		(t_array_list *)(&world->solid_shapes), i);
+		t_solid_shape** shape = get_element_or_null_in_list((t_array_list *)(&world->solid_shapes), i);
+		++i;
+
 		if (object == *shape)
-			continue ;
-		if ((*shape)->is_hit(light_ray, *shape, &hit_record) && \
-		get_length_squared(subtract_vector3(light.coordinates, \
-		add_vector3(surface, normalize_vector3(surface_to_light)))) \
-		> get_length_squared(subtract_vector3(hit_record.point, \
-		light.coordinates)))
-			return (true);
+		{
+			continue;
+		}
+
+		if ((*shape)->is_hit(light_ray, *shape, &hit_record))
+		{
+			const float hitpoint_to_light_length = get_length_squared(subtract_vector3(hit_record.point, light.coordinates));
+			if (surface_to_light_length > hitpoint_to_light_length)
+			{
+				return (true);
+			}
+		}
 	}
 	return (false);
 }

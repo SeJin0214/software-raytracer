@@ -15,8 +15,7 @@
 # include "solid_shape_getter.h"
 # include "cylinder.h"
 
-bool		is_hit_cylinder(const t_ray ray, \
-const void* obj, t_hit_record* out);
+bool	is_hit_cylinder(const t_ray ray, const void* obj, t_hit_record* out);
 
 /** 
  * P = O + tD
@@ -62,21 +61,22 @@ const t_vector3 down_c, t_hit_record* out)
 {
 	const float		numerator = dot_product3x3(cylinder->\
 	shape.local_basis.row[Z], subtract_vector3(down_c, ray.origin));
-	const float		denominator = dot_product3x3(\
-	cylinder->shape.local_basis.row[Z], ray.direction);
-	float			solution;
-	t_vector3		p;
-	t_vector3		p_sub_c;
+	const float		denominator = dot_product3x3(cylinder->shape.local_basis.row[Z], ray.direction);
 
-	if (denominator == 0 || numerator / denominator < 0 \
-	|| numerator / denominator >= out->t)
+	if (denominator == 0 || numerator / denominator < 0 || numerator / denominator >= out->t)
+	{
 		return (false);
-	solution = numerator / denominator;
-	p = get_point_in_ray(ray, solution);
-	p_sub_c = subtract_vector3(p, down_c);
-	if (dot_product3x3(p_sub_c, p_sub_c) > \
-	(cylinder->diameter / 2) * (cylinder->diameter / 2))
+	}
+
+	float solution = numerator / denominator;
+	t_vector3 p = get_point_in_ray(ray, solution);
+	t_vector3 p_sub_c = subtract_vector3(p, down_c);
+
+	if (dot_product3x3(p_sub_c, p_sub_c) > (cylinder->diameter / 2) * (cylinder->diameter / 2))
+	{
 		return (false);
+	}
+
 	out->t = solution;
 	out->point = p;
 	out->normal = get_normal_at_hit_point(cylinder, multiply_vector3(\
@@ -92,11 +92,9 @@ const t_cylinder* cylinder, t_hit_record* out)
 	const t_vector3	n = cylinder->shape.local_basis.row[Z];
 	const t_ray		upward_ray = get_ray(cylinder->shape.coordinates, n);
 	const t_vector3	up_c = get_point_in_ray(upward_ray, cylinder->height / 2);
-	const t_vector3	down_c = get_point_in_ray(upward_ray, \
-	-(cylinder->height / 2));
-	bool			is_hit;
+	const t_vector3	down_c = get_point_in_ray(upward_ray, -(cylinder->height / 2));
 
-	is_hit = is_hit_up_cap(ray, cylinder, up_c, out);
+	bool is_hit = is_hit_up_cap(ray, cylinder, up_c, out);
 	is_hit = is_hit_down_cap(ray, cylinder, down_c, out) || is_hit;
 	return (is_hit);
 }
@@ -114,16 +112,14 @@ const t_cylinder *cy, const float solution, t_hit_record* out)
 {
 	const float	height = calculate_hit_height(ray, \
 	cy->shape.local_basis.row[Z], cy->shape.coordinates, solution);
-	t_ray		height_ray;
-	t_vector3	radius;
-	t_vector3	normal;
 
 	out->t = solution;
 	out->point = get_point_in_ray(ray, out->t);
 	out->color = get_color_at_hit_point(cy, out->point);
-	height_ray = get_ray(cy->shape.coordinates, cy->shape.local_basis.row[Z]);
-	radius = subtract_vector3(out->point, get_point_in_ray(height_ray, height));
-	normal = normalize_vector3(radius);
+	
+	t_ray height_ray = get_ray(cy->shape.coordinates, cy->shape.local_basis.row[Z]);
+	t_vector3 radius = subtract_vector3(out->point, get_point_in_ray(height_ray, height));
+	t_vector3 normal = normalize_vector3(radius);
 	out->normal = get_normal_at_hit_point(cy, normal, out->point);
 	out->object = (void *)cy;
 }

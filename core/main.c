@@ -23,7 +23,7 @@
 
 #define MAX_THREAD_SIZE (16)
 
-int	main(int argc, char** argv)
+int	main(int argc, const char** argv)
 {
 	t_world		world;
 	t_canvas	canvas;
@@ -72,10 +72,9 @@ int	input_key(int key, t_input *input)
 void	render_multi_thread(t_world* world, t_canvas* canvas)
 {
 	pthread_t	pids[MAX_THREAD_SIZE];
-	size_t		i;
 	t_renderer	renderer[MAX_THREAD_SIZE];
 
-	i = 0;
+	size_t i = 0;
 	while (i < MAX_THREAD_SIZE)
 	{
 		renderer[i].world = world;

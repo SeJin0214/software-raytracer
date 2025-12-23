@@ -19,12 +19,13 @@
 #include "world.h"
 #include "parse.h"
 
-bool	try_parse(int argc, char** argv, t_world *out_world, t_canvas* canvas)
+bool	try_parse(const int argc, const char** argv, t_world *out_world, t_canvas* canvas)
 {
 	if (argc != 2 || is_valid_file(argv[1]) == false)
 	{
 		return (false);
 	}
+
 	if (init_world(out_world, canvas) == false \
 	|| try_parse_file(argv[1], out_world, canvas) == false \
 	|| out_world->is_valid_ambient_light == false \
@@ -37,7 +38,7 @@ bool	try_parse(int argc, char** argv, t_world *out_world, t_canvas* canvas)
 	return (true);
 }
 
-bool	is_valid_file(char* filename)
+bool	is_valid_file(const char* filename)
 {
 	while (*filename != '\0')
 	{
@@ -50,36 +51,41 @@ bool	is_valid_file(char* filename)
 	return (false);
 }
 
-bool	try_parse_file(char* filename, t_world *out_world, t_canvas* canvas)
+bool	try_parse_file(const char* filename, t_world *out_world, t_canvas* canvas)
 {
-	int			fd;
-	char		*line;
-	char		**attributes;
-	bool		is_succeed;
-
-	fd = open(filename, O_RDONLY);
+	const int fd = open(filename, O_RDONLY);
 	if (fd == -1)
+	{
 		return (false);
-	is_succeed = true;
+	}
+
+	bool is_succeed = true;
 	while (true)
 	{
-		line = get_next_line(fd);
+		char* line = get_next_line(fd);
 		if (line == NULL)
-			break ;
+		{
+			break;
+		}
 		line[ft_strlen(line) - 1] = '\0';
-		attributes = ft_split(line, ' ');
+
+		char** attributes = ft_split(line, ' ');
 		if (attributes[0] != NULL)
-			is_succeed = try_parse_attributes(attributes, out_world, canvas);
+		{
+			is_succeed = try_parse_attributes((const char**)attributes, out_world, canvas);
+		}
 		clear_words(attributes);
 		free(line);
 		if (is_succeed == false)
-			break ;
+		{
+			break;
+		}
 	}
 	close(fd);
 	return (is_succeed);
 }
 
-bool	try_parse_attributes(char** attributes, \
+bool	try_parse_attributes(const char** attributes, \
 t_world *out_world, t_canvas* canvas)
 {
 	bool	is_succeed;

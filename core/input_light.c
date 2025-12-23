@@ -17,7 +17,6 @@
 bool	try_move_light(t_world* world, const int key)
 {
 	t_action	action;
-	t_light*	light;
 
 	if (key == HOME)
 		action = ACTION_LIGHT_MOVE_FRONT;
@@ -33,7 +32,7 @@ bool	try_move_light(t_world* world, const int key)
 		action = ACTION_LIGHT_MOVE_DOWN;
 	else
 		return (false);
-	light = get_element_or_null_in_list(&world->lights, \
+	t_light* light = get_element_or_null_in_list(&world->lights, \
 	world->current_light_index);
 	move_light(light, action);
 	return (true);

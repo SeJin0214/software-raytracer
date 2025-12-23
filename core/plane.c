@@ -46,13 +46,10 @@ bool	is_hit_plane(const t_ray ray, const void* obj, t_hit_record* out)
 {
 	const t_plane	*plane = obj;
 	const t_vector3	n = plane->shape.local_basis.row[Z];
-	const float		numerator = dot_product3x3(n, \
-	subtract_vector3(plane->shape.coordinates, ray.origin));
+	const float		numerator = dot_product3x3(n, subtract_vector3(plane->shape.coordinates, ray.origin));
 	const float		denominator = dot_product3x3(n, ray.direction);
 
-	if (denominator == 0 \
-	|| numerator / denominator <= 0 \
-	|| numerator / denominator >= out->t)
+	if (denominator == 0 || numerator / denominator <= 0 || numerator / denominator >= out->t)
 	{
 		return (false);
 	}
@@ -64,13 +61,11 @@ bool	is_hit_plane(const t_ray ray, const void* obj, t_hit_record* out)
 	return (true);
 }
 
-t_vector2	get_uv_coordinate_in_plane(\
-const void* plane, const t_vector3 hit_point)
+t_vector2	get_uv_coordinate_in_plane(const void* plane, const t_vector3 hit_point)
 {
 	t_vector2		uv;
-	const t_plane	*pl = plane;
-	const t_vector3	direction = (subtract_vector3(hit_point, \
-	pl->shape.coordinates));
+	const t_plane*	pl = plane;
+	const t_vector3	direction = subtract_vector3(hit_point, pl->shape.coordinates);
 
 	uv.x = dot_product3x3(direction, pl->shape.local_basis.row[X]);
 	uv.y = dot_product3x3(direction, pl->shape.local_basis.row[Y]);

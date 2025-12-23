@@ -6,7 +6,7 @@
 /*   By: sejjeong <sejjeong@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:49:21 by sejjeong          #+#    #+#             */
-/*   Updated: 2025/12/23 17:38:12 by sejjeong         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:23:00 by sejjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int				ft_atoi(const char *nptr);
 int				ft_atoi_base(const char *num, const char *base);
 long			ft_atol(const char *nptr);
 bool			try_atoi(const char *nums, int *out_result);
-bool			try_atof(char *nums, float *out_result);
+bool			try_atof(const char *nums, float *out_result);
 void			*ft_calloc(size_t nmemb, size_t size);
 void			*ft_realloc(void *pa, size_t current_size, \
 size_t override_size);
@@ -106,7 +106,7 @@ char			*ft_strtrim(const char *s1, const char *set);
 size_t			ft_strs_len(const char **strs);
 char			**ft_split(const char *s, char c);
 size_t			get_count_words(const char *s, char c);
-size_t			get_count_to_words(char **words);
+size_t			get_count_to_words(const char **words);
 char			**ft_split_by_quote(const char *str, const char delim);
 char			*ft_itoa(int n);
 char			*ft_uitoa(unsigned int n);

@@ -16,9 +16,8 @@
 void	update_scale_diameter_sphere(void* obj, \
 const t_action action)
 {
-	t_sphere*	sphere;
+	t_sphere* sphere = obj;
 
-	sphere = obj;
 	if (action == ACTION_OBJECT_DIAMETER_SCALE_UP)
 	{
 		sphere->diameter += 0.5f;

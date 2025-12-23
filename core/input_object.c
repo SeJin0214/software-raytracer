@@ -16,7 +16,6 @@
 
 bool	try_move_shape(t_world* world, const int key)
 {
-	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == 'w')
@@ -33,7 +32,7 @@ bool	try_move_shape(t_world* world, const int key)
 		action = ACTION_OBJECT_MOVE_DOWN;
 	else
 		return (false);
-	shape = world->solid_shapes.get_element_or_null(\
+	t_solid_shape** shape = world->solid_shapes.get_element_or_null(\
 	&world->solid_shapes, world->current_object_index);
 	move_shape(*shape, action);
 	return (true);
@@ -41,7 +40,6 @@ bool	try_move_shape(t_world* world, const int key)
 
 bool	try_rotate_shape(t_world* world, const int key)
 {
-	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == 'f')
@@ -58,7 +56,7 @@ bool	try_rotate_shape(t_world* world, const int key)
 		action = ACTION_X_AXIS_ROTATING_OBJECT_CLOCKWISE;
 	else
 		return (false);
-	shape = world->solid_shapes.get_element_or_null(\
+	t_solid_shape** shape = world->solid_shapes.get_element_or_null(\
 	&world->solid_shapes, world->current_object_index);
 	rotate_shape(*shape, action);
 	return (true);
@@ -66,7 +64,6 @@ bool	try_rotate_shape(t_world* world, const int key)
 
 bool	try_update_shape_scale(t_world* world, const int key)
 {
-	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == 'u')
@@ -79,7 +76,7 @@ bool	try_update_shape_scale(t_world* world, const int key)
 		action = ACTION_OBJECT_HEIGHT_SCALE_DOWN;
 	else
 		return (false);
-	shape = world->solid_shapes.get_element_or_null(\
+	t_solid_shape** shape = world->solid_shapes.get_element_or_null(\
 	&world->solid_shapes, world->current_object_index);
 	(*shape)->scale_diameter(*shape, action);
 	(*shape)->scale_height(*shape, action);
@@ -113,7 +110,6 @@ bool	try_change_shape(t_world* world, const int key)
 
 bool	try_change_texture(t_world* world, const int key)
 {
-	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == '1')
@@ -132,7 +128,7 @@ bool	try_change_texture(t_world* world, const int key)
 	{
 		return (false);
 	}
-	shape = world->solid_shapes.get_element_or_null(\
+	t_solid_shape** shape = world->solid_shapes.get_element_or_null(\
 	&world->solid_shapes, world->current_object_index);
 	set_texcture(*shape, action);
 	return (true);

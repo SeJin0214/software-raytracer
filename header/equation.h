@@ -50,8 +50,7 @@ typedef struct s_quadratic_equation
  * N * F = height
 */
 
-inline t_quadratic_equation	load_hit_cy_equation(const t_ray ray, \
-const t_cylinder cylinder)
+inline t_quadratic_equation	load_hit_cy_equation(const t_ray ray, const t_cylinder cylinder)
 {
 	t_quadratic_equation	result;
 	const t_vector3			n = cylinder.shape.local_basis.row[Z];

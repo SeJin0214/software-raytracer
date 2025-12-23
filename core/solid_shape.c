@@ -22,9 +22,8 @@
 
 void	move_shape(void* obj, const t_action action)
 {
-	t_solid_shape	*shape;
+	t_solid_shape* shape = obj;
 
-	shape = obj;
 	if (action == ACTION_OBJECT_MOVE_UP)
 		shape->coordinates = add_vector3(shape->coordinates, \
 		shape->local_basis.row[Y]);
@@ -47,12 +46,10 @@ void	move_shape(void* obj, const t_action action)
 
 void	rotate_shape(void* obj, const t_action action)
 {
-	t_quaternion	current;
-	t_solid_shape	*shape;
+	t_solid_shape*	shape = obj;
 	t_quaternion	q_delta;
 
-	shape = obj;
-	current = convert_quaternion(shape->local_basis);
+	t_quaternion current = convert_quaternion(shape->local_basis);
 	if (action == ACTION_X_AXIS_ROTATING_OBJECT_CLOCKWISE)
 		q_delta = get_rotation_quaternion(shape->local_basis.row[X], 5);
 	else if (action == ACTION_X_AXIS_ROTATING_OBJECT_COUNTERCLOCKWISE)
@@ -73,27 +70,31 @@ void	rotate_shape(void* obj, const t_action action)
 
 void	set_texcture(void* obj, const t_action action)
 {
-	t_solid_shape	*shape;
+	t_solid_shape* shape = obj;
 
-	shape = obj;
 	if (action == ACTION_CHANGE_TEXTURE_BASIC)
+	{
 		shape->texture_type = TEXTURE_BASIC;
+	}
 	else if (action == ACTION_CHANGE_TEXTURE_CHECKERBOARD)
+	{
 		shape->texture_type = TEXTURE_CHECKERBOARD;
+	}
 	else if (action == ACTION_CHANGE_TEXTURE_IMAGE)
+	{
 		shape->texture_type = TEXTURE_IMAGE;
+	}
 }
 
 t_matrix3x3	get_local_basis(t_vector3 n)
 {
-	t_matrix3x3	result;
-	t_vector3	up;
-
-	up = get_vector3(0.0f, 1.0f, 0.0f);
+	t_vector3 up = get_vector3(0.0f, 1.0f, 0.0f);
 	if (fabsf(n.y) > 0.9f)
 	{
 		up = get_vector3(1.0f, 0.0f, 0.0f);
 	}
+
+	t_matrix3x3	result;
 	result.row[X] = cross_product3x3(up, n);
 	result.row[Y] = cross_product3x3(n, result.row[X]);
 	result.row[Z] = n;
@@ -102,13 +103,10 @@ t_matrix3x3	get_local_basis(t_vector3 n)
 
 void	destroy_shapes(t_array_list *list)
 {
-	size_t			i;
-	t_solid_shape	**shape;
-
-	i = 0;
+	size_t i = 0;
 	while (i < list->count)
 	{
-		shape = list->get_element_or_null(list, i);
+		t_solid_shape** shape = list->get_element_or_null(list, i);
 		(*shape)->delete((*shape));
 		++i;
 	}

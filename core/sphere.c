@@ -64,25 +64,25 @@ t_vector2	get_uv_coordinate_in_sphere(const void* sphere, const t_vector3 hit_po
 bool	is_hit_sphere(const t_ray ray, const void* obj, t_hit_record* out)
 {
 	const t_sphere*			sphere = obj;
-	const t_vector3			oc = \
-	subtract_vector3(ray.origin, sphere->shape.coordinates);
+	const t_vector3			oc = subtract_vector3(ray.origin, sphere->shape.coordinates);
 	t_quadratic_equation	equation;
-	float					solution;
 
 	equation.a = dot_product3x3(ray.direction, ray.direction);
 	equation.b = 2.0f * dot_product3x3(oc, ray.direction);
-	equation.c = dot_product3x3(oc, oc) - (sphere->diameter / 2) \
-	* (sphere->diameter / 2);
-	equation.discriminant = equation.b * equation.b \
-	- 4 * equation.a * equation.c;
+	equation.c = dot_product3x3(oc, oc) - (sphere->diameter / 2) * (sphere->diameter / 2);
+	equation.discriminant = equation.b * equation.b - 4 * equation.a * equation.c;
 	if (equation.discriminant <= 0)
+	{
 		return (false);
-	solution = get_quadtatic_root_minus(equation);
+	}
+	float solution = get_quadtatic_root_minus(equation);
 	if (solution <= 0 || out->t < solution)
 	{
 		solution = get_quadtatic_root_plus(equation);
 		if (solution <= 0 || out->t < solution)
+		{
 			return (false);
+		}
 	}
 	set_hit_record_by_sphere(out, solution, ray, sphere);
 	return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   try_atof.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejjeong <sejjeong@student.42gyeongsan>    +#+  +:+       +#+        */
+/*   By: sejjeong <sejjeong@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:16:14 by sejjeong          #+#    #+#             */
-/*   Updated: 2025/02/12 18:06:56 by sejjeong         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:25:19 by sejjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "libft.h"
 #define INT_MAX_LENGTH 10
 
-static bool		try_convert_int(char *nums, int index, \
+static bool		try_convert_int(const char *nums, const int index, \
 int *out_integer, int *out_float);
-static float	add_place(float integer_place, float float_place);
-static bool		try_atoi_only_digit(char *nums, int *out_result);
+static float	add_place(const float integer_place, float float_place);
+static bool		try_atoi_only_digit(const char *nums, int *out_result);
 
-bool	try_atof(char *nums, float *out_result)
+bool	try_atof(const char *nums, float *out_result)
 {
 	int		i;
 	int		j;
@@ -46,7 +46,7 @@ bool	try_atof(char *nums, float *out_result)
 	return (true);
 }
 
-static bool	try_convert_int(char *nums, int index, \
+static bool	try_convert_int(const char *nums, const int index, \
 int *out_integer, int *out_float)
 {
 	char	*integer_place;
@@ -74,7 +74,7 @@ int *out_integer, int *out_float)
 	return (is_succeed_integer && is_succedd_float);
 }
 
-static float	add_place(float integer_place, float float_place)
+static float	add_place(const float integer_place, float float_place)
 {
 	float	result;
 
@@ -86,7 +86,7 @@ static float	add_place(float integer_place, float float_place)
 	return (result);
 }
 
-static bool	try_atoi_only_digit(char *nums, int *out_result)
+static bool	try_atoi_only_digit(const char *nums, int *out_result)
 {
 	*out_result = 0;
 	if (ft_strlen(nums) > INT_MAX_LENGTH)

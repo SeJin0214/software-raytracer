@@ -31,16 +31,11 @@ t_ray	get_ray_mappied_to_pixel(const t_camera camera, const float pitch_degrees,
 
 inline t_hit_record	load_hit_record(const t_world* world, const t_ray ray)
 {
-	size_t			i;
-	t_hit_record	hit_record;
-	t_solid_shape	**shape;
-
-	i = 0;
-	hit_record = get_hit_record();
+	size_t i = 0;
+	t_hit_record hit_record = get_hit_record();
 	while (i < world->solid_shapes.count)
 	{
-		shape = get_element_or_null_in_list(\
-		(t_array_list *)(&world->solid_shapes), i);
+		t_solid_shape** shape = get_element_or_null_in_list((t_array_list *)(&world->solid_shapes), i);
 		(*shape)->is_hit(ray, *shape, &hit_record);
 		++i;
 	}
@@ -62,18 +57,18 @@ inline t_ivector3	trace_reflection_color(const t_world* world, \
 const t_ray ray, const t_hit_record hit_record, size_t depth)
 {
 	const t_vector3		r = get_reflection_vector3(ray.origin, hit_record);
-	const t_ray			reflection = get_ray(add_vector3(hit_record.point, \
-	multiply_vector3(r, 0.01f)), r);
+	const t_ray			reflection = get_ray(add_vector3(hit_record.point, multiply_vector3(r, 0.01f)), r);
 	const t_hit_record	next_record = load_hit_record(world, reflection);
-	t_ivector3			color;
-	t_light				reflection_light;
 
 	if (is_collision(next_record) == false || depth > 5)
 	{
 		return (get_ivector3(0, 0, 0));
 	}
-	color = compute_reflection_lighting_recursive(\
+
+	t_ivector3 color = compute_reflection_lighting_recursive(\
 	world, reflection, next_record, ++depth);
+
+	t_light reflection_light;
 	reflection_light.colors = color;
 	reflection_light.coordinates = next_record.point;
 	reflection_light.brightness = 0.5f;

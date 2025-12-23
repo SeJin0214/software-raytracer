@@ -14,7 +14,7 @@
 #include "parse.h"
 #include "sphere.h"
 
-bool	try_add_sphere_to_world(char** attributes, t_world* world)
+bool	try_add_sphere_to_world(const char** attributes, t_world* world)
 {
 	const bool	is_invalid_format = get_count_to_words(attributes) != SPHERE_ATTRIBUTE_LENGTH \
 	|| get_count_words(attributes[SPHERE_ATTRIBUTE_CENTER], ',') != VECTOR_ATTRIBUTE_COUNT \
@@ -41,14 +41,14 @@ bool	try_add_sphere_to_world(char** attributes, t_world* world)
 	return (true);
 }
 
-bool	try_add_plane_to_world(char** attributes, t_world* world)
+bool	try_add_plane_to_world(const char** attributes, t_world* world)
 {
 	const bool	is_invalid_format = get_count_to_words(attributes) != PLANE_ATTRIBUTE_LENGTH \
 	|| get_count_words(attributes[PLANE_ATTRIBUTE_COORDINATES], ',') != VECTOR_ATTRIBUTE_COUNT \
 	|| get_count_words(attributes[PLANE_ATTRIBUTE_ORIENTATION_VECTOR], ',') != VECTOR_ATTRIBUTE_COUNT \
 	|| get_count_words(attributes[PLANE_ATTRIBUTE_COLORS], ',') != COLORS_ATTRIBUTE_COUNT;
 
-	t_plane		plane;
+	t_plane plane;
 	if (is_invalid_format || is_invalid_value_in_plane(attributes, &plane))
 	{
 		return (false);
@@ -66,7 +66,7 @@ bool	try_add_plane_to_world(char** attributes, t_world* world)
 	return (true);
 }
 
-bool	is_invalid_value_in_plane(char** attributes, t_plane* plane)
+bool	is_invalid_value_in_plane(const char** attributes, t_plane* plane)
 {
 	const bool	is_converted_coordinate = try_parse_vector3(\
 	attributes[PLANE_ATTRIBUTE_COORDINATES], &plane->shape.coordinates);
@@ -80,7 +80,7 @@ bool	is_invalid_value_in_plane(char** attributes, t_plane* plane)
 	|| is_converted_color == false);
 }
 
-bool	try_add_cylinder_to_world(char** attributes, t_world* world)
+bool	try_add_cylinder_to_world(const char** attributes, t_world* world)
 {
 	const bool	is_invalid_format = get_count_to_words(attributes) != CYLINDER_ATTRIBUTE_LENGTH \
 	|| get_count_words(attributes[CYLINDER_ATTRIBUTE_COORDINATES], ',') != VECTOR_ATTRIBUTE_COUNT \
@@ -106,7 +106,7 @@ bool	try_add_cylinder_to_world(char** attributes, t_world* world)
 	return (true);
 }
 
-bool	is_invalid_value_in_cylinder(char** attributes, t_cylinder* cylinder)
+bool	is_invalid_value_in_cylinder(const char** attributes, t_cylinder* cylinder)
 {
 	return (try_parse_vector3(attributes[CYLINDER_ATTRIBUTE_COORDINATES], &cylinder->shape.coordinates) == false \
 	|| try_parse_vector3(attributes[CYLINDER_ATTRIBUTE_NORMALIZED_VECTOR], &cylinder->shape.local_basis.row[Z]) == false \
@@ -118,14 +118,14 @@ bool	is_invalid_value_in_cylinder(char** attributes, t_cylinder* cylinder)
 	|| try_parse_color(attributes[CYLINDER_ATTRIBUTE_COLORS], &cylinder->shape.colors) == false);
 }
 
-bool	try_add_cone_to_world(char** attributes, t_world* world)
+bool	try_add_cone_to_world(const char** attributes, t_world* world)
 {
 	const bool	is_invalid_format = get_count_to_words(attributes) != CONE_ATTRIBUTE_LENGTH \
 	|| get_count_words(attributes[CONE_ATTRIBUTE_COORDINATES], ',') != VECTOR_ATTRIBUTE_COUNT \
 	|| get_count_words(attributes[CONE_ATTRIBUTE_NORMALIZED_VECTOR], ',') != VECTOR_ATTRIBUTE_COUNT \
 	|| get_count_words(attributes[CONE_ATTRIBUTE_COLORS], ',') != COLORS_ATTRIBUTE_COUNT;
 
-	t_cone	cone;
+	t_cone cone;
 	if (is_invalid_format || is_invalid_value_in_cone(attributes, &cone))
 	{
 		return (false);
@@ -144,7 +144,7 @@ bool	try_add_cone_to_world(char** attributes, t_world* world)
 	return (true);
 }
 
-bool	is_invalid_value_in_cone(char** attributes, t_cone* cone)
+bool	is_invalid_value_in_cone(const char** attributes, t_cone* cone)
 {
 	return (try_parse_vector3(attributes[CONE_ATTRIBUTE_COORDINATES], &cone->shape.coordinates) == false \
 	|| try_parse_vector3(attributes[CONE_ATTRIBUTE_NORMALIZED_VECTOR], &cone->shape.local_basis.row[Z]) == false \

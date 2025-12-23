@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejjeong <sejjeong@student.42gyeongsan>    +#+  +:+       +#+        */
+/*   By: sejjeong <sejjeong@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:33:22 by sejjeong          #+#    #+#             */
-/*   Updated: 2025/02/12 18:38:54 by sejjeong         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:22:52 by sejjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	clear_words(char **words)
 	words = NULL;
 }
 
-size_t	get_count_to_words(char **words)
+size_t	get_count_to_words(const char **words)
 {
 	size_t	i;
 

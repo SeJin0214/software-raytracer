@@ -13,7 +13,6 @@
 #include "libft.h"
 #include "render.h"
 
-extern inline t_ivector3	add_color(const t_ivector3 color0, \
-const t_ivector3 color1);
+extern inline t_ivector3	add_color(const t_ivector3 color0, const t_ivector3 color1);
 extern inline int			convert_colors(const t_ivector3 colors);
 extern inline t_ivector3	convert_color_to_ivec3(const int color);
