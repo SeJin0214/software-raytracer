@@ -8,13 +8,13 @@
 
 <details>
   <summary>call stack 및 설명</summary>  
-  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/render_bonus.c#L27  
-  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/render_bonus.h#L52  
-  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/render_bonus.h#L34  
+  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/render.c#L27  
+  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/render.h#L52  
+  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/render.h#L34  
   <br>  
   모든 구 오브젝트를 직선의 벡터 방정식과 구의 방정식을 이용하여 판별합니다.  
   해가 2개라면 교차되는 것이고, 해가 양수여야 앞에 있어야 합니다. 또한 기존의 값보다 작아야 카메라에 제일 가까운 것으로 판별됩니다.  
-  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/sphere_bonus.c#L51-L76  
+  https://github.com/SeJin0214/software-raytracer/blob/1edeffc7ce8ad6c8f460188826a69a7d20f27729/bonus/sphere.c#L51-L76  
 
   > 평면, 원기둥, 원뿔 모두 각자의 방정식을 이용해 판별합니다.
   
@@ -44,9 +44,9 @@ for (int i = 0; i < planes.size(); ++i)
 함수포인터를 활용한 동적 바인딩을 사용할 경우, <mark>인라인을 못해 성능은 조금 느리더라도 유지보수와 확장성이 좋은 구조</mark>가 나올 거라 생각했습니다.  
 이에 따라 <mark>OOP의 상속 및 다형성을 흉내내는 구조</mark>를 작성했습니다.  
 상속은 메모리가 한 덩어리인 것을 이용하였습니다.  
-https://github.com/SeJin0214/software-raytracer/blob/b69682ad74367df9f454c8dda0824674aa019e6a/bonus/solid_shape_bonus.h#L33-L46
-https://github.com/SeJin0214/software-raytracer/blob/54ec9ae3f66594c3f45a19fca00351bca7730691/bonus/render_bonus.h#L38-L49
-https://github.com/SeJin0214/software-raytracer/blob/0b300d6ad47a2156e04f05fb2f8aff8ea39063ae/bonus/sphere_bonus.h#L20-L24
+https://github.com/SeJin0214/software-raytracer/blob/b69682ad74367df9f454c8dda0824674aa019e6a/bonus/solid_shape.h#L33-L46
+https://github.com/SeJin0214/software-raytracer/blob/54ec9ae3f66594c3f45a19fca00351bca7730691/bonus/render.h#L38-L49
+https://github.com/SeJin0214/software-raytracer/blob/0b300d6ad47a2156e04f05fb2f8aff8ea39063ae/bonus/sphere.h#L20-L24
 
 
 

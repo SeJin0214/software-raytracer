@@ -39,7 +39,7 @@ https://github.com/user-attachments/assets/ec823d54-804c-46b0-99a2-9c509b6be8e8
 
 
 ## 실행  
-  make bonus  
+  make  
   ./miniRT scene.rt  
 
 

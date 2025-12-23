@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sejjeong <sejjeong@student.42gyeongsan>    +#+  +:+       +#+         #
+#    By: sejjeong <sejjeong@student.42gyeongsan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/20 15:07:14 by sejjeong          #+#    #+#              #
-#    Updated: 2025/02/28 15:44:01 by sejjeong         ###   ########.fr        #
+#    Updated: 2025/12/23 15:29:29 by sejjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,11 @@ CFLAGS = -Wall -Wextra -Werror -pthread -O3 -march=native
 RM = rm
 RFLAGS = -rf
 
-SRCS_DIR = ./mandatory
 LIBFT_DIR = ./libft
 MLX_DIR = ./mlx
 OBJS_NAME = objs
 
-INCLUDE = -I $(SRCS_DIR)
+INCLUDE = -I $(CORE_DIR)
 LIBFT_INCLUDE = -I $(LIBFT_DIR)
 MLX_INCLUDE = -I $(MLX_DIR)
 
@@ -34,77 +33,43 @@ LIBRARY_LINK = -L/user/lib -l Xext -l X11 -l m -l bsd
 
 LINK = $(LIBFT_LINK) $(MLX_LINK) $(LIBRARY_LINK)
 
-SRCS = $(SRCS_DIR)/main.c \
-	$(SRCS_DIR)/camera.c \
-	$(SRCS_DIR)/cylinder.c \
-	$(SRCS_DIR)/cylinder_object.c \
-	$(SRCS_DIR)/cylinder_action.c \
-	$(SRCS_DIR)/equation.c \
-	$(SRCS_DIR)/hit_record.c \
-	$(SRCS_DIR)/init_canvas.c \
-	$(SRCS_DIR)/parse.c \
-	$(SRCS_DIR)/parse_util.c \
-	$(SRCS_DIR)/parse_solid_shape.c \
-	$(SRCS_DIR)/plane.c \
-	$(SRCS_DIR)/plane_action.c \
-	$(SRCS_DIR)/ray.c \
-	$(SRCS_DIR)/render.c \
-	$(SRCS_DIR)/shadow.c \
-	$(SRCS_DIR)/solid_shape.c \
-	$(SRCS_DIR)/sphere.c \
-	$(SRCS_DIR)/sphere_action.c \
-	$(SRCS_DIR)/world.c \
-	$(SRCS_DIR)/render_util.c \
-	$(SRCS_DIR)/light.c \
-	$(SRCS_DIR)/quaternion.c \
-	$(SRCS_DIR)/input_object.c \
-	$(SRCS_DIR)/input_camera.c \
-	$(SRCS_DIR)/input_light.c \
-	
-BONUS_DIR = ./bonus
+CORE_DIR = ./core
 
-BONUS_SRCS = $(BONUS_DIR)/main_bonus.c \
-	$(BONUS_DIR)/camera_bonus.c \
-	$(BONUS_DIR)/hit_cylinder_bonus.c \
-	$(BONUS_DIR)/cylinder_object_bonus.c \
-	$(BONUS_DIR)/cylinder_action_bonus.c \
-	$(BONUS_DIR)/cone_bonus.c \
-	$(BONUS_DIR)/hit_cone_bonus.c \
-	$(BONUS_DIR)/cone_action_bonus.c \
-	$(BONUS_DIR)/equation_bonus.c \
-	$(BONUS_DIR)/hit_record_bonus.c \
-	$(BONUS_DIR)/init_canvas_bonus.c \
-	$(BONUS_DIR)/parse_bonus.c \
-	$(BONUS_DIR)/parse_util_bonus.c \
-	$(BONUS_DIR)/parse_solid_shape_bonus.c \
-	$(BONUS_DIR)/parse_solid_shape2_bonus.c \
-	$(BONUS_DIR)/plane_bonus.c \
-	$(BONUS_DIR)/plane_action_bonus.c \
-	$(BONUS_DIR)/ray_bonus.c \
-	$(BONUS_DIR)/render_bonus.c \
-	$(BONUS_DIR)/shadow_bonus.c \
-	$(BONUS_DIR)/solid_shape_bonus.c \
-	$(BONUS_DIR)/sphere_bonus.c \
-	$(BONUS_DIR)/sphere_action_bonus.c \
-	$(BONUS_DIR)/world_bonus.c \
-	$(BONUS_DIR)/render_util_bonus.c \
-	$(BONUS_DIR)/light_bonus.c \
-	$(BONUS_DIR)/quaternion_bonus.c \
-	$(BONUS_DIR)/input_object_bonus.c \
-	$(BONUS_DIR)/input_camera_bonus.c \
-	$(BONUS_DIR)/input_light_bonus.c \
+SRCS = $(CORE_DIR)/main.c \
+	$(CORE_DIR)/camera.c \
+	$(CORE_DIR)/hit_cylinder.c \
+	$(CORE_DIR)/cylinder_object.c \
+	$(CORE_DIR)/cylinder_action.c \
+	$(CORE_DIR)/cone.c \
+	$(CORE_DIR)/hit_cone.c \
+	$(CORE_DIR)/cone_action.c \
+	$(CORE_DIR)/equation.c \
+	$(CORE_DIR)/hit_record.c \
+	$(CORE_DIR)/init_canvas.c \
+	$(CORE_DIR)/parse.c \
+	$(CORE_DIR)/parse_util.c \
+	$(CORE_DIR)/parse_solid_shape.c \
+	$(CORE_DIR)/parse_solid_shape2.c \
+	$(CORE_DIR)/plane.c \
+	$(CORE_DIR)/plane_action.c \
+	$(CORE_DIR)/ray.c \
+	$(CORE_DIR)/render.c \
+	$(CORE_DIR)/shadow.c \
+	$(CORE_DIR)/solid_shape.c \
+	$(CORE_DIR)/sphere.c \
+	$(CORE_DIR)/sphere_action.c \
+	$(CORE_DIR)/world.c \
+	$(CORE_DIR)/render_util.c \
+	$(CORE_DIR)/light.c \
+	$(CORE_DIR)/quaternion.c \
+	$(CORE_DIR)/input_object.c \
+	$(CORE_DIR)/input_camera.c \
+	$(CORE_DIR)/input_light.c \
 
 OBJS = ${SRCS:.c=.o}
 ASM = ${SRCS:.c=.s}
-BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
-
-ifdef ON_BONUS_FLAG
-	OBJECTS = $(BONUS_OBJS)
-	INCLUDE = -I $(BONUS_DIR)
-else
-	OBJECTS = $(OBJS)
-endif
+OBJECTS = $(OBJS)
 
 all: $(NAME)
 
@@ -120,13 +85,6 @@ $(NAME): $(OBJECTS)
 	touch $<
 	$(CC) $(CFLAGS) $(LIBFT_INCLUDE) $(MLX_INCLUDE) $(INCLUDE) -S $< -o $@
 
-bonus:
-	make ON_BONUS_FLAG=1 all
-
-bonusre:
-	make fclean
-	make bonus
-
 clean:
 	make -C $(MLX_DIR) clean
 	make -C $(LIBFT_DIR) clean
@@ -141,4 +99,4 @@ re:
 	make fclean 
 	make all
 
-.PHONY : all clean fclean re bonus bonusre
+.PHONY : all clean fclean re
