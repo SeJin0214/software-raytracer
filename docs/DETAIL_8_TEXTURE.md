@@ -20,7 +20,7 @@ https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b35
 sphere의 경우  
 https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/sphere.c#L48
 여기서 bump map을 위한 normal을 바꿔줍니다.  
-https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/header/sphere.h#L50-L61
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/header/sphere.h#L31-L41
 
   <br>
 https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/header/solid_shape_getter.h#L59-L60
@@ -33,6 +33,7 @@ https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b35
 https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/header/solid_shape_getter.h#L32-L46
 
 </details>
+
 
 
 
