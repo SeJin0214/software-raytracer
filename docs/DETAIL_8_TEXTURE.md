@@ -9,28 +9,28 @@
   </summary>
 
 매핑된 키에 따라 texture 타입을 변경합니다.  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/solid_shape.c#L75-L85
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/solid_shape.c#L75-L85
 
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/render.c#L27
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/render.h#L52
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/render.h#L34
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/render.h#L46
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/render.c#L27
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/render.h#L52
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/render.h#L34
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/render.h#L46
 
   <br>
 sphere의 경우  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/sphere.c#L51
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/sphere.c#L51
 여기서 bump map을 위한 normal을 바꿔줍니다.  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/sphere.h#L50-L59
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/sphere.h#L50-L59
 
   <br>
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/solid_shape_getter.h#L59-L60
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/solid_shape_getter.h#L48-L49
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/solid_shape_getter.h#L52
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/solid_shape_getter.h#L59-L60
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/solid_shape_getter.h#L48-L49
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/solid_shape_getter.h#L52
 
 uv 좌표를 구하는 공식은 가져다 사용했습니다.  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/sphere.h#L33-L47
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/sphere.h#L33-L47
 이후 uv좌표에 맞게 texel color를 지정했습니다.  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/solid_shape_getter.h#L32-L46
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/solid_shape_getter.h#L32-L46
 
 </details>
 

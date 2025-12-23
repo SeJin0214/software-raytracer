@@ -45,7 +45,7 @@ specular와 GI도 구현하기 전, 1회 렌더링 성능입니다.
   멀티 쓰레드를 사용하게 될 경우, 더 많은 코어를 이용하기 때문에 더 빠를 것이라 생각했습니다.  
   요즘 나오는 컴퓨터가 8개의 코어를 갖고 있다 들어, 코어 하나당 2개의 쓰레드를 할당했습니다.  
   canvas size에 맞게 가로, 세로 4등분 하여 16개의 쓰레드를 만들어 각 타일의 색을 넣게 했습니다.
-  https://github.com/SeJin0214/software_raytracing/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd.c#L70-L88
+  https://github.com/SeJin0214/software_raytracing/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/c26ea3edfce9724883d59552b356a3dc46e9580e.c#L70-L88
   <br>
   <img width="175" height="496" alt="image" src="https://github.com/user-attachments/assets/9526297e-20eb-4e2b-886e-79f5e70d5fec" />
   <br>

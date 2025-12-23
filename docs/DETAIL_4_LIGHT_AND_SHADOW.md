@@ -13,7 +13,7 @@ color를 0 ~ 1이 아닌 0 ~ 255의 범위로 잡았습니다.
 색상을 이용해 아래의 코드처럼 각 조명을 계산하고 더해야 합니다.
 
 diffuse + ambient + specular = pixel color
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/render.c#L84-L100
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/render.c#L84-L100
 
 <details><summary>implement diffuse and ambient</summary>
 <img width="745" height="868" alt="image" src="https://github.com/user-attachments/assets/2bf81828-5148-4166-8dae-05fd2500b5bd" />
@@ -21,17 +21,17 @@ https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744c
 
 
 <details><summary>diffuse and ambient description</summary>
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/light.h#L19-L31  
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/light.h#L19-L31  
   표면의 노멀 벡터와 중심에서 빛으로 가는 벡터의 내적을 구하여 빛의 세기를 구하였습니다.  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/light.h#L33-L49
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/light.h#L33-L49
 
   albedo는 물체가 빛을 반사하는 정도를 나타내는 척도이며, 두 조명 모두 albedo 연산을 추가로 해줬습니다.  
-  https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/mandatory/shadow.h#L47-L58  
+  https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/mandatory/shadow.h#L47-L58  
   
 </details>
 <details><summary>specular description</summary>
   표면의 빛 반사각과 표면에서 카메라로 향하는 벡터가 15도 이내 정도로 닮을 때만 하이라이트가 보이게 해주었습니다.
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/light.h#L69-L82
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/light.h#L69-L82
 </details>  
   
   
@@ -40,7 +40,7 @@ https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744c
 1. 빛에서 표면까지 Ray를 쏩니다.  
 2. 부딪히는 Object가 있다면, 그 Object에서 빛까지의 거리와 표면에서 빛까지 거리를 비교합니다.  
 3. 표면에서 빛까지의 거리가 더 크다면 Object에 가려져 있는 것이므로 그림자가 지는 것으로 판단합니다.  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/mandatory/shadow.h#L17-L45
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/mandatory/shadow.h#L17-L45
 
 
 

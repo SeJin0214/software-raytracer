@@ -26,12 +26,12 @@
 .rt 파일 형식에 맞춰 Object 초기화를 위해 parser를 만들었습니다.  
 올바른 오브젝트는 직접 만든 ArrayList에 넣어 world 내에서 관리했습니다.  
 
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/parse_solid_shape.c#L110-L111
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/parse_solid_shape.c#L110-L111
 
 <details><summary>Parsing call stack 및 설명</summary>
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd.c#L32  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/parse.c#L53  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/parse.c#L82  
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/c26ea3edfce9724883d59552b356a3dc46e9580e.c#L32  
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/parse.c#L53  
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/parse.c#L82  
 <br>
 유지보수와 가독성을 위해 Enum으로 attribute를 명시해주었습니다.  
 <mark>attribute의 포맷(x,y,z의 요소의 개수 등)이 올바르지 않거나, value 값이 올바르지 않으면</mark> 실패하도록 하였습니다.   
@@ -39,9 +39,9 @@ https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744c
 <br>
 
 > 카메라, 라이트, 구, 평면, 원뿔 모두 비슷한 코드로 동작합니다.
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/parse.h#L63-L71  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/parse_solid_shape.c#L87-L95  
-https://github.com/SeJin0214/software-raytracer/blob/8ebf8f50f5dd47df6ce41f5744cbc4353ea483fd/core/parse_solid_shape.c#L115-L125
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/parse.h#L63-L71  
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/parse_solid_shape.c#L87-L95  
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/parse_solid_shape.c#L115-L125
 </details>
 
 
