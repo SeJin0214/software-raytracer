@@ -15,11 +15,11 @@ Specular 까지 구현하게 되면, 아래의 사진처럼 하이라이트가 �
 
 <details>
   <summary>call stack and description</summary>
-  https://github.com/SeJin0214/software-raytracer/blob/b5600b1a699ecfe3b0b033581ef3527a187a6b5b/core/render.c#L74-L75
-https://github.com/SeJin0214/software-raytracer/blob/b5600b1a699ecfe3b0b033581ef3527a187a6b5b/core/render.c#L83
+  https://github.com/SeJin0214/software-raytracer/blob/main/core/render.c#L74-L75
+https://github.com/SeJin0214/software-raytracer/blob/main/core/render.c#L83
 빛의 반사각에 닿는 물체도 하나의 광원이라 생각했습니다.  
 표면의 색상을 구할 때, trace_reflection_color 함수도 호출하여 빛의 반사각에 닿는 물체의 빛까지 반영합니다.  
-  https://github.com/SeJin0214/software-raytracer/blob/aab4f628e9528c4f39fa238485b7db2cc978e1d4/core/render.h#L63-L87
+  https://github.com/SeJin0214/software-raytracer/blob/main/core/render.h#L63-L87
 
   
 </details>
