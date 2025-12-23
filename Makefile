@@ -6,7 +6,7 @@
 #    By: sejjeong <sejjeong@student.42gyeongsan.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/20 15:07:14 by sejjeong          #+#    #+#              #
-#    Updated: 2025/12/23 15:29:29 by sejjeong         ###   ########.fr        #
+#    Updated: 2025/12/23 17:23:50 by sejjeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBFT_DIR = ./libft
 MLX_DIR = ./mlx
 OBJS_NAME = objs
 
-INCLUDE = -I $(CORE_DIR)
+INCLUDE_DIR = ./header
+INCLUDE = -I $(INCLUDE_DIR)
 LIBFT_INCLUDE = -I $(LIBFT_DIR)
 MLX_INCLUDE = -I $(MLX_DIR)
 
@@ -37,11 +38,9 @@ CORE_DIR = ./core
 
 SRCS = $(CORE_DIR)/main.c \
 	$(CORE_DIR)/camera.c \
-	$(CORE_DIR)/hit_cylinder.c \
 	$(CORE_DIR)/cylinder_object.c \
 	$(CORE_DIR)/cylinder_action.c \
 	$(CORE_DIR)/cone.c \
-	$(CORE_DIR)/hit_cone.c \
 	$(CORE_DIR)/cone_action.c \
 	$(CORE_DIR)/equation.c \
 	$(CORE_DIR)/hit_record.c \
@@ -49,7 +48,6 @@ SRCS = $(CORE_DIR)/main.c \
 	$(CORE_DIR)/parse.c \
 	$(CORE_DIR)/parse_util.c \
 	$(CORE_DIR)/parse_solid_shape.c \
-	$(CORE_DIR)/parse_solid_shape2.c \
 	$(CORE_DIR)/plane.c \
 	$(CORE_DIR)/plane_action.c \
 	$(CORE_DIR)/ray.c \
@@ -76,14 +74,14 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 		make -C $(MLX_DIR)
 		make -C $(LIBFT_DIR)
-		$(CC) $(CFLAGS) $(LIBFT_INCLUDE) $(MLX_INCLUDE) $(INCLUDE) $^ $(LINK) -o $@
+		$(CC) $(CFLAGS) $(INCLUDE) $(LIBFT_INCLUDE) $(MLX_INCLUDE) $^ $(LINK) -o $@
 
 %.o: %.c
 	touch $<
-	$(CC) $(CFLAGS) $(LIBFT_INCLUDE) $(MLX_INCLUDE) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $(LIBFT_INCLUDE) $(MLX_INCLUDE) -c $< -o $@
 %.s: %.c
 	touch $<
-	$(CC) $(CFLAGS) $(LIBFT_INCLUDE) $(MLX_INCLUDE) $(INCLUDE) -S $< -o $@
+	$(CC) $(CFLAGS)  $(INCLUDE) $(LIBFT_INCLUDE) $(MLX_INCLUDE) -S $< -o $@
 
 clean:
 	make -C $(MLX_DIR) clean

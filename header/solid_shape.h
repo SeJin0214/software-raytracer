@@ -32,8 +32,8 @@ typedef enum texture
 
 typedef struct s_solid_shape
 {
-	alignas(16) t_vector3 coordinates;
-	alignas(16) t_ivector3 colors;
+	t_vector3	coordinates;
+	t_ivector3	colors;
 	t_matrix3x3	local_basis;
 	t_texture	texture_type;
 	t_image		texture;
@@ -46,9 +46,9 @@ typedef struct s_solid_shape
 }	t_solid_shape;
 
 /* solid_shape.c */
-void		move_shape(void *obj, const t_action action);
-void		rotate_shape(void *obj, const t_action action);
-void		set_texcture(void *obj, const t_action action);
+void		move_shape(void* obj, const t_action action);
+void		rotate_shape(void* obj, const t_action action);
+void		set_texcture(void* obj, const t_action action);
 void		destroy_shapes(t_array_list *list);
 t_matrix3x3	get_local_basis(t_vector3 n);
 

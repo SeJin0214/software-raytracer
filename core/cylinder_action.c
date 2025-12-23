@@ -13,12 +13,11 @@
 #include <math.h>
 #include "cylinder.h"
 
-void	update_scale_diameter_cylinder(void *obj, \
+void	update_scale_diameter_cylinder(void* obj, \
 const t_action action)
 {
-	t_cylinder	*cylinder;
+	t_cylinder*	cylinder = obj;
 
-	cylinder = obj;
 	if (action == ACTION_OBJECT_DIAMETER_SCALE_UP)
 	{
 		cylinder->diameter += 0.5f;
@@ -29,12 +28,11 @@ const t_action action)
 	}
 }
 
-void	update_scale_height_cylinder(void *obj, \
+void	update_scale_height_cylinder(void* obj, \
 const t_action action)
 {
-	t_cylinder	*cylinder;
+	t_cylinder*	cylinder = obj;
 
-	cylinder = obj;
 	if (action == ACTION_OBJECT_HEIGHT_SCALE_UP)
 	{
 		cylinder->height += 0.5f;

@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_cone.h                                   :+:      :+:    :+:   */
+/*   cone.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sejjeong <sejjeong@student.42gyeongsan>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 17:42:57 by sejjeong          #+#    #+#             */
-/*   Updated: 2025/02/28 18:56:38 by sejjeong         ###   ########.fr       */
+/*   Created: 2025/02/22 08:44:26 by sejjeong          #+#    #+#             */
+/*   Updated: 2025/02/28 19:56:22 by sejjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HIT_CONE_BONUS_H
-# define HIT_CONE_BONUS_H
-# include "cone.h"
-# include "hit_cone.h"
-# include "solid_shape_getter2.h"
+#ifndef CONE_BONUS_H
+# define CONE_BONUS_H
+# include "solid_shape.h"
+# include "solid_shape_getter.h"
 
-inline bool	is_hit_down_cap_in_cone(const t_ray ray, const t_cone *cone, \
-const t_vector3 down_c, t_hit_record *out)
+typedef struct s_cone
+{
+	t_solid_shape	shape;
+	float			diameter;
+	float			height;
+}	t_cone;
+
+/* cone.c */
+bool		is_hit_cone(const t_ray ray, const void* obj, t_hit_record* out);
+t_vector2	get_uv_coordinate_in_cone(const void* cone, const t_vector3 hit_point);
+t_cone*		copy_construction_to_cone(const t_cone cone);
+void		delete_cone(void* obj);
+
+
+inline bool	is_hit_down_cap_in_cone(const t_ray ray, const t_cone* cone, \
+const t_vector3 down_c, t_hit_record* out)
 {
 	const float		numerator = dot_product3x3(cone->\
 	shape.local_basis.row[Z], subtract_vector3(down_c, ray.origin));
@@ -62,5 +75,10 @@ inline t_vector3	get_normal_in_cone(const t_vector3 point, const t_cone cone)
 
 	return (surface_normal);
 }
+
+/* cone_action.c */
+void	update_scale_diameter_cone(void* cone, const t_action action);
+void	update_scale_height_cone(void* cone, const t_action action);
+
 
 #endif

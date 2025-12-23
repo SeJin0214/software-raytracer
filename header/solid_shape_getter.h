@@ -18,8 +18,8 @@
 inline t_ivector3	get_checkerboard_color_at_hit_point(\
 const void *shape, const t_vector3 hit_point)
 {
-	const t_solid_shape	*sh = shape;
-	const t_vector2		uv = sh->get_uv_coordinate(sh, hit_point);
+	const t_solid_shape*	sh = shape;
+	const t_vector2			uv = sh->get_uv_coordinate(sh, hit_point);
 
 	if ((int)floorf((uv.x * sh->checkerboard_scale) \
 	+ (int)floorf(uv.y * sh->checkerboard_scale)) % 2 == 0)
@@ -31,10 +31,10 @@ const void *shape, const t_vector3 hit_point)
 
 inline t_ivector3	get_texel_color(const void *shape, int x, int y)
 {
-	const t_solid_shape	*sh = shape;
-	const int			offset = sh->texture.width * y + x;
-	int					*image_frame_buffer;
-	int					color;
+	const t_solid_shape*	sh = shape;
+	const int				offset = sh->texture.width * y + x;
+	int*					image_frame_buffer;
+	int						color;
 
 	if (y < 0 || x < 0 || x >= sh->texture.width || y >= sh->texture.width)
 	{
@@ -48,10 +48,10 @@ inline t_ivector3	get_texel_color(const void *shape, int x, int y)
 inline t_ivector3	get_image_color_at_hit_point(\
 const void *shape, const t_vector3 hit_point)
 {
-	const t_solid_shape	*sh = shape;
-	const t_vector2		uv = sh->get_uv_coordinate(sh, hit_point);
-	const int			x = uv.x * sh->texture.width;
-	const int			y = uv.y * sh->texture.height;
+	const t_solid_shape*	sh = shape;
+	const t_vector2			uv = sh->get_uv_coordinate(sh, hit_point);
+	const int				x = uv.x * sh->texture.width;
+	const int				y = uv.y * sh->texture.height;
 
 	return (get_texel_color(sh, x, y));
 }
@@ -59,7 +59,7 @@ const void *shape, const t_vector3 hit_point)
 inline t_ivector3	get_color_at_hit_point(const void *shape, \
 const t_vector3 hit_point)
 {
-	const t_solid_shape	*sh = shape;
+	const t_solid_shape*	sh = shape;
 
 	if (sh->texture_type == TEXTURE_BASIC)
 	{
@@ -76,5 +76,54 @@ const t_vector3 hit_point)
 	ft_assert(false, "get_color_at_hit_point, invalid texture type");
 	return (sh->colors);
 }
+
+inline float	get_height(t_ivector3 color)
+{
+	return ((color.x + color.y + color.z) / (3.0f * 255.0f));
+}
+
+inline t_vector3	get_bump_normal(const void *shape, const t_vector3 n, \
+int x, int y)
+{
+	const float			left_height = get_height(\
+	get_texel_color(shape, x - 1, y));
+	const float			up_height = get_height(\
+	get_texel_color(shape, x, y - 1));
+	const float			right_height = get_height(\
+	get_texel_color(shape, x + 1, y));
+	const float			down_height = get_height(\
+	get_texel_color(shape, x, y + 1));
+	const t_vector3		normal = normalize_vector3(\
+	get_vector3(right_height - left_height, down_height - up_height, \
+	sqrtf(1.0f - powf(right_height - left_height, 2) \
+	- powf(down_height - up_height, 2))));
+
+	return (normalize_vector3(multiply_vector_and_matrix3x3(normal, \
+	get_local_basis(n))));
+}
+
+inline t_vector3	get_normal_at_hit_point(const void *shape, \
+const t_vector3 n, const t_vector3 hit_point)
+{
+	const t_solid_shape*	sh = (t_solid_shape *)shape;
+	t_vector2				uv;
+	t_ivector2				xy;
+
+	if (sh->texture_type == TEXTURE_BASIC \
+	|| sh->texture_type == TEXTURE_CHECKERBOARD)
+	{
+		return (n);
+	}
+	else if (sh->texture_type == TEXTURE_IMAGE)
+	{
+		uv = sh->get_uv_coordinate(sh, hit_point);
+		xy.x = uv.x * sh->texture.width;
+		xy.y = uv.y * sh->texture.height;
+		return (get_bump_normal(shape, n, xy.x, xy.y));
+	}
+	ft_assert(false, "invalid texture type");
+	return (n);
+}
+
 
 #endif

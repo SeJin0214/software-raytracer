@@ -19,17 +19,17 @@
 
 typedef struct s_canvas
 {
-	t_xvar		*xvar;
-	t_win_list	*win;
-	t_img		*img;
+	t_xvar*		xvar;
+	t_win_list*	win;
+	t_img*		img;
 	int			bit_per_pixel;
 	int			line_bit_size;
 	int			endian;
 	t_screen	screen;
 }	t_canvas;
 
-void	init_canvas(t_canvas *out_canvas);
-void	free_canvas(t_canvas *out_canvas);
-t_img	*init_img(t_canvas *pa_canvas);
+void	init_canvas(t_canvas* out_canvas);
+void	free_canvas(t_canvas* out_canvas);
+t_img*	init_img(t_canvas* pa_canvas);
 
 #endif

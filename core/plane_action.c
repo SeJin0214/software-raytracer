@@ -12,7 +12,7 @@
 
 #include "plane.h"
 
-void	update_scale_diameter_plane(void *obj, \
+void	update_scale_diameter_plane(void* obj, \
 const t_action action)
 {
 	(void) obj;
@@ -20,7 +20,7 @@ const t_action action)
 	return ;
 }
 
-void	update_scale_height_plane(void *obj, \
+void	update_scale_height_plane(void* obj, \
 const t_action action)
 {
 	(void) obj;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejjeong <sejjeong@student.42gyeongsan>    +#+  +:+       +#+        */
+/*   By: sejjeong <sejjeong@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:49:21 by sejjeong          #+#    #+#             */
-/*   Updated: 2025/02/21 20:53:12 by sejjeong         ###   ########.fr       */
+/*   Updated: 2025/12/23 17:38:12 by sejjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				ft_toupper(int c);
 int				ft_tolower(int c);
 bool			is_whitespace(const char ch);
 bool			has_uppercase(const char *str);
-void			do_nothing(void *object);
+void			do_nothing(void* object);
 
 /* memory */
 inline void	*ft_memset(void *dest, int c, size_t n)

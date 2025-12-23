@@ -12,12 +12,11 @@
 
 #include "cone.h"
 
-void	update_scale_diameter_cone(void *obj, \
+void	update_scale_diameter_cone(void* obj, \
 const t_action action)
 {
-	t_cone	*cone;
+	t_cone*	cone = obj;
 
-	cone = obj;
 	if (action == ACTION_OBJECT_DIAMETER_SCALE_UP)
 	{
 		cone->diameter += 0.5f;
@@ -28,12 +27,11 @@ const t_action action)
 	}
 }
 
-void	update_scale_height_cone(void *obj, \
+void	update_scale_height_cone(void* obj, \
 const t_action action)
 {
-	t_cone	*cone;
+	t_cone*	cone = obj;
 
-	cone = obj;
 	if (action == ACTION_OBJECT_HEIGHT_SCALE_UP)
 	{
 		cone->height += 0.5f;

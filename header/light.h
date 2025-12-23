@@ -81,6 +81,6 @@ const t_light light, const t_hit_record hit_record)
 	return (multiply_ivector3(specular_color, light.brightness));
 }
 
-void	move_light(t_light *light, const t_action action);
+void	move_light(t_light* light, const t_action action);
 
 #endif

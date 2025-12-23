@@ -13,7 +13,7 @@
 #include "input.h"
 #include "world.h"
 
-bool	try_move_camera(t_world *world, const int key)
+bool	try_move_camera(t_world* world, const int key)
 {
 	t_action	action;
 
@@ -35,7 +35,7 @@ bool	try_move_camera(t_world *world, const int key)
 	return (true);
 }
 
-bool	try_rotate_camera(t_world *world, const int key)
+bool	try_rotate_camera(t_world* world, const int key)
 {
 	t_action	action;
 

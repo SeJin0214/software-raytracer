@@ -12,11 +12,11 @@
 
 #ifndef HIT_CYLINDER_BONUS_H
 # define HIT_CYLINDER_BONUS_H
-# include "solid_shape_getter2.h"
+# include "solid_shape_getter.h"
 # include "cylinder.h"
 
 bool		is_hit_cylinder(const t_ray ray, \
-const void *obj, t_hit_record *out);
+const void* obj, t_hit_record* out);
 
 /** 
  * P = O + tD
@@ -28,8 +28,8 @@ const void *obj, t_hit_record *out);
  * NO + tND - Nc = 0
  * t = N(c - O) / ND 
 */	
-inline bool	is_hit_up_cap(const t_ray ray, const t_cylinder *cylinder, \
-const t_vector3 up_c, t_hit_record *out)
+inline bool	is_hit_up_cap(const t_ray ray, const t_cylinder* cylinder, \
+const t_vector3 up_c, t_hit_record* out)
 {
 	const float		numerator = dot_product3x3(cylinder->\
 	shape.local_basis.row[Z], subtract_vector3(up_c, ray.origin));
@@ -57,8 +57,8 @@ const t_vector3 up_c, t_hit_record *out)
 	return (true);
 }
 
-inline bool	is_hit_down_cap(const t_ray ray, const t_cylinder *cylinder, \
-const t_vector3 down_c, t_hit_record *out)
+inline bool	is_hit_down_cap(const t_ray ray, const t_cylinder* cylinder, \
+const t_vector3 down_c, t_hit_record* out)
 {
 	const float		numerator = dot_product3x3(cylinder->\
 	shape.local_basis.row[Z], subtract_vector3(down_c, ray.origin));
@@ -87,7 +87,7 @@ const t_vector3 down_c, t_hit_record *out)
 }
 
 inline bool	is_hit_cylinder_end_cap(const t_ray ray, \
-const t_cylinder *cylinder, t_hit_record *out)
+const t_cylinder* cylinder, t_hit_record* out)
 {
 	const t_vector3	n = cylinder->shape.local_basis.row[Z];
 	const t_ray		upward_ray = get_ray(cylinder->shape.coordinates, n);
@@ -110,7 +110,7 @@ const t_vector3 n, const t_vector3 c, float t)
 }
 
 inline void	set_hit_record_in_cylinder(const t_ray ray, \
-const t_cylinder *cy, const float solution, t_hit_record *out)
+const t_cylinder *cy, const float solution, t_hit_record* out)
 {
 	const float	height = calculate_hit_height(ray, \
 	cy->shape.local_basis.row[Z], cy->shape.coordinates, solution);

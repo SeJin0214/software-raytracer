@@ -13,10 +13,6 @@
 #include <stdlib.h>
 #include "plane.h"
 #include "solid_shape_getter.h"
-#include "solid_shape_getter2.h"
-
-extern inline t_vector2	get_uv_coordinate_in_plane(\
-const void *plane, const t_vector3 hit_point);
 
 t_plane	*copy_construction_to_plane(const t_plane plane)
 {
@@ -32,7 +28,7 @@ t_plane	*copy_construction_to_plane(const t_plane plane)
 	return (result);
 }
 
-void	delete_plane(void *obj)
+void	delete_plane(void* obj)
 {
 	free(obj);
 }
@@ -46,7 +42,7 @@ void	delete_plane(void *obj)
  * tND = Np1 - NO
  * t = (Np1 - NO) / ND 
  */
-bool	is_hit_plane(const t_ray ray, const void *obj, t_hit_record *out)
+bool	is_hit_plane(const t_ray ray, const void* obj, t_hit_record* out)
 {
 	const t_plane	*plane = obj;
 	const t_vector3	n = plane->shape.local_basis.row[Z];
@@ -66,4 +62,19 @@ bool	is_hit_plane(const t_ray ray, const void *obj, t_hit_record *out)
 	out->color = get_color_at_hit_point(plane, out->point);
 	out->object = (void *)plane;
 	return (true);
+}
+
+t_vector2	get_uv_coordinate_in_plane(\
+const void* plane, const t_vector3 hit_point)
+{
+	t_vector2		uv;
+	const t_plane	*pl = plane;
+	const t_vector3	direction = (subtract_vector3(hit_point, \
+	pl->shape.coordinates));
+
+	uv.x = dot_product3x3(direction, pl->shape.local_basis.row[X]);
+	uv.y = dot_product3x3(direction, pl->shape.local_basis.row[Y]);
+	uv.x = uv.x - floor(uv.x);
+	uv.y = uv.y - floor(uv.y);
+	return (uv);
 }

@@ -14,10 +14,10 @@
 #include "world.h"
 #include "light.h"
 
-bool	try_move_light(t_world *world, const int key)
+bool	try_move_light(t_world* world, const int key)
 {
 	t_action	action;
-	t_light		*light;
+	t_light*	light;
 
 	if (key == HOME)
 		action = ACTION_LIGHT_MOVE_FRONT;
@@ -39,7 +39,7 @@ bool	try_move_light(t_world *world, const int key)
 	return (true);
 }
 
-bool	try_change_light(t_world *world, const int key)
+bool	try_change_light(t_world* world, const int key)
 {
 	if (key == '=')
 	{

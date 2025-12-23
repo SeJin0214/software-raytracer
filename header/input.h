@@ -100,18 +100,18 @@ typedef enum action
 int		input_key(int key, t_input *input);
 
 /* input_object.c */
-bool	try_move_shape(t_world *world, const int key);
-bool	try_rotate_shape(t_world *world, const int key);
-bool	try_update_shape_scale(t_world *world, const int key);
-bool	try_change_shape(t_world *world, const int key);
-bool	try_change_texture(t_world *world, const int key);
+bool	try_move_shape(t_world* world, const int key);
+bool	try_rotate_shape(t_world* world, const int key);
+bool	try_update_shape_scale(t_world* world, const int key);
+bool	try_change_shape(t_world* world, const int key);
+bool	try_change_texture(t_world* world, const int key);
 
 /* input_camera.c */
-bool	try_move_camera(t_world *world, const int key);
-bool	try_rotate_camera(t_world *world, const int key);
+bool	try_move_camera(t_world* world, const int key);
+bool	try_rotate_camera(t_world* world, const int key);
 
 /* input_light.c */
-bool	try_move_light(t_world *world, const int key);
-bool	try_change_light(t_world *world, const int key);
+bool	try_move_light(t_world* world, const int key);
+bool	try_change_light(t_world* world, const int key);
 
 #endif

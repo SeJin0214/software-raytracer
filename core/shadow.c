@@ -13,7 +13,7 @@
 #include "shadow.h"
 #include "vector.h"
 
-extern inline bool			is_shadowed_surface(const t_world *world, \
-const t_light light, const t_vector3 surface, void *object);
+extern inline bool			is_shadowed_surface(const t_world* world, \
+const t_light light, const t_vector3 surface, void* object);
 extern inline t_ivector3		reflect_light(\
 const t_ivector3 ligth_resource_color, const t_ivector3 surface_color);

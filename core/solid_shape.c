@@ -17,11 +17,10 @@
 #include "world.h"
 #include "solid_shape.h"
 #include "solid_shape_getter.h"
-#include "solid_shape_getter2.h"
 #include "vector.h"
 #include "quaternion.h"
 
-void	move_shape(void *obj, const t_action action)
+void	move_shape(void* obj, const t_action action)
 {
 	t_solid_shape	*shape;
 
@@ -46,7 +45,7 @@ void	move_shape(void *obj, const t_action action)
 		shape->local_basis.row[Z]);
 }
 
-void	rotate_shape(void *obj, const t_action action)
+void	rotate_shape(void* obj, const t_action action)
 {
 	t_quaternion	current;
 	t_solid_shape	*shape;
@@ -72,7 +71,7 @@ void	rotate_shape(void *obj, const t_action action)
 	shape->local_basis.row[Z] = normalize_vector3(shape->local_basis.row[Z]);
 }
 
-void	set_texcture(void *obj, const t_action action)
+void	set_texcture(void* obj, const t_action action)
 {
 	t_solid_shape	*shape;
 

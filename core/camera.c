@@ -14,7 +14,7 @@
 #include "quaternion.h"
 #include "solid_shape.h"
 
-void	init_camera(t_world *world, t_canvas *canvas)
+void	init_camera(t_world* world, t_canvas* canvas)
 {
 	world->camera.local_basis.row[Z] = \
 	normalize_vector3(world->camera.local_basis.row[Z]);
@@ -26,7 +26,7 @@ void	init_camera(t_world *world, t_canvas *canvas)
 	world->is_valid_camera = true;
 }
 
-void	move_camera(t_camera *camera, const t_action action)
+void	move_camera(t_camera* camera, const t_action action)
 {
 	if (action == ACTION_CAMERA_MOVE_UP)
 		camera->coordinates = add_vector3(camera->coordinates, \
@@ -48,12 +48,11 @@ void	move_camera(t_camera *camera, const t_action action)
 		camera->local_basis.row[Z]);
 }
 
-void	rotate_camera(t_camera *camera, const t_action action)
+void	rotate_camera(t_camera* camera, const t_action action)
 {
-	t_quaternion	current;
-	t_quaternion	q_delta;
+	t_quaternion q_delta;
 
-	current = convert_quaternion(camera->local_basis);
+	t_quaternion current = convert_quaternion(camera->local_basis);
 	if (action == ACTION_X_AXIS_ROTATING_CAMERA_CLOCKWISE)
 		q_delta = get_rotation_quaternion(camera->local_basis.row[X], 5);
 	else if (action == ACTION_X_AXIS_ROTATING_CAMERA_COUNTERCLOCKWISE)

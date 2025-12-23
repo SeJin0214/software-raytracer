@@ -21,17 +21,15 @@
 # define PI 3.141592f
 
 /* render.c */
-void		render_multi_thread(t_world *world, t_canvas *canvas);
-void		*render(void *obj);
+void		render_multi_thread(t_world* world, t_canvas* canvas);
+void*		render(void* obj);
 bool		is_collision(const t_hit_record record);
-t_ivector3	compute_reflection_lighting_recursive(const t_world *world, \
+t_ivector3	compute_reflection_lighting_recursive(const t_world* world, \
 const t_ray ray, const t_hit_record hit_record, size_t depth);
-void		put_color_in_image_frame(t_renderer *renderer, const int x, \
-const int y, const int color);
-t_ray		get_ray_mappied_to_pixel(const t_camera camera, \
-const float x_angle_to_convert, const float y_angle_to_convert);
+void		put_color_in_image_frame(t_renderer* renderer, const int x, const int y, const int color);
+t_ray	get_ray_mappied_to_pixel(const t_camera camera, const float pitch_degrees, const float yaw_degree);
 
-inline t_hit_record	load_hit_record(const t_world *world, const t_ray ray)
+inline t_hit_record	load_hit_record(const t_world* world, const t_ray ray)
 {
 	size_t			i;
 	t_hit_record	hit_record;
@@ -49,7 +47,7 @@ inline t_hit_record	load_hit_record(const t_world *world, const t_ray ray)
 	return (hit_record);
 }
 
-inline t_ivector3	load_hit_point_color(const t_world *world, const t_ray ray)
+inline t_ivector3	load_hit_point_color(const t_world* world, const t_ray ray)
 {
 	const t_hit_record	hit_record = load_hit_record(world, ray);
 
@@ -60,7 +58,7 @@ inline t_ivector3	load_hit_point_color(const t_world *world, const t_ray ray)
 	return (compute_reflection_lighting_recursive(world, ray, hit_record, 0));
 }
 
-inline t_ivector3	trace_reflection_color(const t_world *world, \
+inline t_ivector3	trace_reflection_color(const t_world* world, \
 const t_ray ray, const t_hit_record hit_record, size_t depth)
 {
 	const t_vector3		r = get_reflection_vector3(ray.origin, hit_record);

@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "parse.h"
 
-bool	try_parse_vector3(char *attribute, t_vector3 *out_result)
+bool	try_parse_vector3(char* attribute, t_vector3* out_result)
 {
 	char	**temp;
 	bool	is_succeed_x;
@@ -28,7 +28,7 @@ bool	try_parse_vector3(char *attribute, t_vector3 *out_result)
 	return (is_succeed_x && is_succeed_y && is_succeed_z);
 }
 
-bool	try_parse_color(char *attribute, t_ivector3 *out_result)
+bool	try_parse_color(char* attribute, t_ivector3 *out_result)
 {
 	char		**temp;
 	bool		is_succeed_r;

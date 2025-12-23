@@ -17,12 +17,12 @@
 #include "equation.h"
 #include "render.h"
 
-extern inline void		set_hit_record_by_sphere(t_hit_record *out, \
-const float solution, const t_ray ray, const t_sphere *sphere);
+extern inline void		set_hit_record_by_sphere(t_hit_record* out, \
+const float solution, const t_ray ray, const t_sphere* sphere);
 
-t_sphere	*init_construction_to_sphere(const t_sphere sphere, t_world *world)
+t_sphere*	init_construction_to_sphere(const t_sphere sphere, t_world* world)
 {
-	t_sphere	*result;
+	t_sphere*	result;
 
 	result = malloc(sizeof(t_sphere));
 	result->shape = sphere.shape;
@@ -40,17 +40,30 @@ t_sphere	*init_construction_to_sphere(const t_sphere sphere, t_world *world)
 	return (result);
 }
 
-void	delete_sphere(void *obj)
+void	delete_sphere(void* obj)
 {
 	free(obj);
 }
 
-extern inline t_vector2	get_uv_coordinate_in_sphere(\
-const void *sphere, const t_vector3 hit_point);
-
-bool	is_hit_sphere(const t_ray ray, const void *obj, t_hit_record *out)
+t_vector2	get_uv_coordinate_in_sphere(const void* sphere, const t_vector3 hit_point)
 {
-	const t_sphere			*sphere = obj;
+	t_vector2		uv;
+	t_vector3		local;
+	const t_sphere	*sp = sphere;
+	const t_vector3	n = normalize_vector3(\
+	subtract_vector3(hit_point, sp->shape.coordinates));
+
+	local.x = dot_product3x3(n, sp->shape.local_basis.row[X]);
+	local.y = dot_product3x3(n, sp->shape.local_basis.row[Y]);
+	local.z = dot_product3x3(n, sp->shape.local_basis.row[Z]);
+	uv.x = (atan2f(local.z, local.x) + PI) / (2 * PI);
+	uv.y = acosf(local.y) / PI;
+	return (uv);
+}
+
+bool	is_hit_sphere(const t_ray ray, const void* obj, t_hit_record* out)
+{
+	const t_sphere*			sphere = obj;
 	const t_vector3			oc = \
 	subtract_vector3(ray.origin, sphere->shape.coordinates);
 	t_quadratic_equation	equation;

@@ -13,10 +13,10 @@
 #include <math.h>
 #include "sphere.h"
 
-void	update_scale_diameter_sphere(void *obj, \
+void	update_scale_diameter_sphere(void* obj, \
 const t_action action)
 {
-	t_sphere	*sphere;
+	t_sphere*	sphere;
 
 	sphere = obj;
 	if (action == ACTION_OBJECT_DIAMETER_SCALE_UP)
@@ -29,7 +29,7 @@ const t_action action)
 	}
 }
 
-void	update_scale_height_sphere(void *obj, \
+void	update_scale_height_sphere(void* obj, \
 const t_action action)
 {
 	(void) obj;

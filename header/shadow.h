@@ -15,8 +15,8 @@
 # include "world.h"
 # include "solid_shape.h"
 
-inline bool	is_shadowed_surface(const t_world *world, const t_light light, \
-const t_vector3 surface, void *object)
+inline bool	is_shadowed_surface(const t_world* world, const t_light light, \
+const t_vector3 surface, void* object)
 {
 	const t_ray		light_ray = get_ray(light.coordinates, \
 	normalize_vector3(subtract_vector3(surface, light.coordinates)));

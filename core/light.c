@@ -26,7 +26,7 @@ const t_hit_record hit_record);
 extern inline t_ivector3	load_specular_color(const t_vector3 viewer_postion, \
 const t_light light, const t_hit_record hit_record);
 
-void	move_light(t_light *light, const t_action action)
+void	move_light(t_light* light, const t_action action)
 {
 	if (action == ACTION_LIGHT_MOVE_UP)
 		light->coordinates.y += 1;

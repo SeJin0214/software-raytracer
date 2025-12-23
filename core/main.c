@@ -21,7 +21,9 @@
 #include "render.h"
 #include <sys/time.h>
 
-int	main(int argc, char **argv)
+#define MAX_THREAD_SIZE (16)
+
+int	main(int argc, char** argv)
 {
 	t_world		world;
 	t_canvas	canvas;
@@ -67,14 +69,14 @@ int	input_key(int key, t_input *input)
 	return (0);
 }
 
-void	render_multi_thread(t_world *world, t_canvas *canvas)
+void	render_multi_thread(t_world* world, t_canvas* canvas)
 {
-	pthread_t	pids[16];
+	pthread_t	pids[MAX_THREAD_SIZE];
 	size_t		i;
-	t_renderer	renderer[16];
+	t_renderer	renderer[MAX_THREAD_SIZE];
 
 	i = 0;
-	while (i < 16)
+	while (i < MAX_THREAD_SIZE)
 	{
 		renderer[i].world = world;
 		renderer[i].canvas = canvas;
@@ -82,15 +84,13 @@ void	render_multi_thread(t_world *world, t_canvas *canvas)
 		renderer[i].last_x = canvas->screen.width / 4.0f * (i % 4 + 1);
 		renderer[i].start_y = canvas->screen.height / 4.0f * (i / 4);
 		renderer[i].last_y = canvas->screen.height / 4.0f * (i / 4 + 1);
-		pthread_mutex_init(&renderer[i].canvas_lock, NULL);
 		pthread_create(&pids[i], NULL, render, &renderer[i]);
 		++i;
 	}
 	i = 0;
-	while (i < 16)
+	while (i < MAX_THREAD_SIZE)
 	{
 		pthread_join(pids[i], NULL);
-		pthread_mutex_destroy(&renderer[i].canvas_lock);
 		++i;
 	}
 	mlx_put_image_to_window(canvas->xvar, canvas->win, canvas->img, 0, 0);

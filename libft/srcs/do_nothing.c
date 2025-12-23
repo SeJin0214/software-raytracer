@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   do_nothing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sejjeong <sejjeong@student.42gyeongsan>    +#+  +:+       +#+        */
+/*   By: sejjeong <sejjeong@student.42gyeongsan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:50:45 by sejjeong          #+#    #+#             */
-/*   Updated: 2025/02/21 20:51:38 by sejjeong         ###   ########.fr       */
+/*   Updated: 2025/12/23 17:38:12 by sejjeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	do_nothing(void *object)
+void	do_nothing(void* object)
 {
 	(void)object;
 }

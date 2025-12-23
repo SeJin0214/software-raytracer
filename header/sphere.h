@@ -15,7 +15,6 @@
 # include <math.h>
 # include "solid_shape.h"
 # include "solid_shape_getter.h"
-# include "solid_shape_getter2.h"
 
 typedef struct s_sphere
 {
@@ -24,31 +23,13 @@ typedef struct s_sphere
 }	t_sphere;
 
 /* sphere.c */
-t_sphere	*init_construction_to_sphere(const t_sphere sphere, \
-t_world *world);
-void		delete_sphere(void *obj);
-bool		is_hit_sphere(const t_ray ray, \
-const void *sphere, t_hit_record *out);
+t_sphere*	init_construction_to_sphere(const t_sphere sphere, t_world* world);
+void		delete_sphere(void* obj);
+bool		is_hit_sphere(const t_ray ray, const void* sphere, t_hit_record* out);
+t_vector2	get_uv_coordinate_in_sphere(const void* sphere, const t_vector3 hit_point);
 
-inline t_vector2	get_uv_coordinate_in_sphere(\
-const void *sphere, const t_vector3 hit_point)
-{
-	t_vector2		uv;
-	t_vector3		local;
-	const t_sphere	*sp = sphere;
-	const t_vector3	n = normalize_vector3(\
-	subtract_vector3(hit_point, sp->shape.coordinates));
-
-	local.x = dot_product3x3(n, sp->shape.local_basis.row[X]);
-	local.y = dot_product3x3(n, sp->shape.local_basis.row[Y]);
-	local.z = dot_product3x3(n, sp->shape.local_basis.row[Z]);
-	uv.x = (atan2f(local.z, local.x) + PI) / (2 * PI);
-	uv.y = acosf(local.y) / PI;
-	return (uv);
-}
-
-inline void	set_hit_record_by_sphere(t_hit_record *out, \
-const float solution, const t_ray ray, const t_sphere *sphere)
+inline void	set_hit_record_by_sphere(t_hit_record* out, \
+const float solution, const t_ray ray, const t_sphere* sphere)
 {
 	out->t = solution;
 	out->point = get_point_in_ray(ray, out->t);
@@ -60,9 +41,7 @@ const float solution, const t_ray ray, const t_sphere *sphere)
 }
 
 /* sphere_action.c */
-void		update_scale_diameter_sphere(void *sphere, \
-const t_action action);
-void		update_scale_height_sphere(void *sphere, \
-const t_action action);
+void		update_scale_diameter_sphere(void* sphere, const t_action action);
+void		update_scale_height_sphere(void* sphere, const t_action action);
 
 #endif

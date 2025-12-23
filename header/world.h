@@ -33,11 +33,11 @@ typedef struct s_world
 	t_image			texture;
 }	t_world;
 
-bool	init_world(t_world *world, t_canvas *canvas);
-void	destroy_world(t_world *world, t_canvas *canvas);
-bool	try_add_ambient_light_to_world(char **attributes, t_world *world);
-bool	try_add_light_to_world(char **attributes, t_world *world);
-bool	try_add_camera_to_world(char **attributes, \
-t_world *world, t_canvas *canvas);
+bool	init_world(t_world* world, t_canvas* canvas);
+void	destroy_world(t_world* world, t_canvas* canvas);
+bool	try_add_ambient_light_to_world(char** attributes, t_world* world);
+bool	try_add_light_to_world(char** attributes, t_world* world);
+bool	try_add_camera_to_world(char** attributes, \
+t_world* world, t_canvas* canvas);
 
 #endif

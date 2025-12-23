@@ -14,9 +14,9 @@
 #include "solid_shape.h"
 #include "world.h"
 
-bool	try_move_shape(t_world *world, const int key)
+bool	try_move_shape(t_world* world, const int key)
 {
-	t_solid_shape	**shape;
+	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == 'w')
@@ -39,9 +39,9 @@ bool	try_move_shape(t_world *world, const int key)
 	return (true);
 }
 
-bool	try_rotate_shape(t_world *world, const int key)
+bool	try_rotate_shape(t_world* world, const int key)
 {
-	t_solid_shape	**shape;
+	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == 'f')
@@ -64,9 +64,9 @@ bool	try_rotate_shape(t_world *world, const int key)
 	return (true);
 }
 
-bool	try_update_shape_scale(t_world *world, const int key)
+bool	try_update_shape_scale(t_world* world, const int key)
 {
-	t_solid_shape	**shape;
+	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == 'u')
@@ -86,7 +86,7 @@ bool	try_update_shape_scale(t_world *world, const int key)
 	return (true);
 }
 
-bool	try_change_shape(t_world *world, const int key)
+bool	try_change_shape(t_world* world, const int key)
 {
 	if (key == ',')
 	{
@@ -111,9 +111,9 @@ bool	try_change_shape(t_world *world, const int key)
 	return (false);
 }
 
-bool	try_change_texture(t_world *world, const int key)
+bool	try_change_texture(t_world* world, const int key)
 {
-	t_solid_shape	**shape;
+	t_solid_shape**	shape;
 	t_action		action;
 
 	if (key == '1')
