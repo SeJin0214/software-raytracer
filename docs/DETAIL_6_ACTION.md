@@ -20,7 +20,7 @@
   <br>
   <br>
   단순하게 조건문으로 key input을 체크했습니다.  
-https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/c26ea3edfce9724883d59552b356a3dc46e9580e.c#L51-L70
+https://github.com/SeJin0214/software-raytracer/blob/c26ea3edfce9724883d59552b356a3dc46e9580e/core/main.c#L51-L70
   <br>
   <br>
   다른 Action이나 오브젝트도 동일하게 해주었습니다.   
