@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <assert.h>
 #include <math.h>
 #include "sphere.h"
 
@@ -25,6 +26,10 @@ const t_action action)
 	else if (action == ACTION_OBJECT_DIAMETER_SCALE_DOWN)
 	{
 		sphere->diameter = fmaxf(sphere->diameter - 0.5f, 0.5f);
+	}
+	else
+	{
+		assert(!"invalid action in update_scale_diameter_sphere");
 	}
 }
 

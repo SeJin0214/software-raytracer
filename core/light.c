@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <assert.h>
 #include <math.h>
 #include "world.h"
 #include "render.h"
@@ -40,4 +41,6 @@ void	move_light(t_light* light, const t_action action)
 		light->coordinates.z += 1;
 	else if (action == ACTION_LIGHT_MOVE_BACK)
 		light->coordinates.z -= 1;
+	else
+		assert(!"invalid action in move_light");
 }

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
@@ -42,6 +43,8 @@ void	move_shape(void* obj, const t_action action)
 	else if (action == ACTION_OBJECT_MOVE_BACK)
 		shape->coordinates = subtract_vector3(shape->coordinates, \
 		shape->local_basis.row[Z]);
+	else
+		assert(!"invalid action in move_shape");
 }
 
 void	rotate_shape(void* obj, const t_action action)
@@ -62,6 +65,11 @@ void	rotate_shape(void* obj, const t_action action)
 		q_delta = get_rotation_quaternion(shape->local_basis.row[Z], 5);
 	else if (action == ACTION_Z_AXIS_ROTATING_OBJECT_COUNTERCLOCKWISE)
 		q_delta = get_rotation_quaternion(shape->local_basis.row[Z], -5);
+	else
+	{
+		assert(!"invalid action in rotate_shape");
+		return;
+	}
 	shape->local_basis = convert_matrix(hamilton_product(current, q_delta));
 	shape->local_basis.row[X] = normalize_vector3(shape->local_basis.row[X]);
 	shape->local_basis.row[Y] = normalize_vector3(shape->local_basis.row[Y]);
@@ -83,6 +91,10 @@ void	set_texcture(void* obj, const t_action action)
 	else if (action == ACTION_CHANGE_TEXTURE_IMAGE)
 	{
 		shape->texture_type = TEXTURE_IMAGE;
+	}
+	else
+	{
+		assert(!"invalid action in set_texture");
 	}
 }
 

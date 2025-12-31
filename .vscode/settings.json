@@ -28,6 +28,7 @@
 		"sphere_bonus.h": "c",
 		"input.h": "c",
 		"input_bonus.h": "c",
-		"sphere.h": "c"
+		"sphere.h": "c",
+		"assert.h": "c"
 	}
 }

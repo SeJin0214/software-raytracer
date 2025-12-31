@@ -19,12 +19,16 @@
 #include "mlx_int.h"
 #include "parse.h"
 #include "render.h"
-#include <sys/time.h>
+
+#include <stdint.h>
+#include <time.h>
+#include "solid_shape.h"
 
 #define MAX_THREAD_SIZE (16)
 
 int	main(int argc, const char** argv)
 {
+	printf("shape sizeof = %ld\n", sizeof(t_solid_shape));
 	t_world		world;
 	t_canvas	canvas;
 	t_input		input;
@@ -69,29 +73,44 @@ int	input_key(int key, t_input *input)
 	return (0);
 }
 
+static inline uint64_t now_ns(void)
+{
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
+    return (uint64_t)ts.tv_sec * 1000000000ull + (uint64_t)ts.tv_nsec;
+}
+
 void	render_multi_thread(t_world* world, t_canvas* canvas)
 {
-	pthread_t	pids[MAX_THREAD_SIZE];
-	t_renderer	renderer[MAX_THREAD_SIZE];
+    uint64_t t0 = now_ns();
+	{
+		pthread_t	pids[MAX_THREAD_SIZE];
+		t_renderer	renderer[MAX_THREAD_SIZE];
 
-	size_t i = 0;
-	while (i < MAX_THREAD_SIZE)
-	{
-		renderer[i].world = world;
-		renderer[i].canvas = canvas;
-		renderer[i].start_x = canvas->screen.width / 4.0f * (i % 4);
-		renderer[i].last_x = canvas->screen.width / 4.0f * (i % 4 + 1);
-		renderer[i].start_y = canvas->screen.height / 4.0f * (i / 4);
-		renderer[i].last_y = canvas->screen.height / 4.0f * (i / 4 + 1);
-		pthread_create(&pids[i], NULL, render, &renderer[i]);
-		++i;
+		size_t i = 0;
+		while (i < MAX_THREAD_SIZE)
+		{
+			renderer[i].world = world;
+			renderer[i].canvas = canvas;
+			renderer[i].start_x = canvas->screen.width / 4.0f * (i % 4);
+			renderer[i].last_x = canvas->screen.width / 4.0f * (i % 4 + 1);
+			renderer[i].start_y = canvas->screen.height / 4.0f * (i / 4);
+			renderer[i].last_y = canvas->screen.height / 4.0f * (i / 4 + 1);
+			pthread_create(&pids[i], NULL, render, &renderer[i]);
+			++i;
+		}
+		i = 0;
+		while (i < MAX_THREAD_SIZE)
+		{
+			pthread_join(pids[i], NULL);
+			++i;
+		}
+		mlx_put_image_to_window(canvas->xvar, canvas->win, canvas->img, 0, 0);
 	}
-	i = 0;
-	while (i < MAX_THREAD_SIZE)
-	{
-		pthread_join(pids[i], NULL);
-		++i;
-	}
-	mlx_put_image_to_window(canvas->xvar, canvas->win, canvas->img, 0, 0);
+	uint64_t t1 = now_ns();
+
+    double sec = (double)(t1 - t0) / 1e9;
+    printf("render_s=%.6f\n", sec); // 소수점 6자리(마음대로 조절)
+
 }
 

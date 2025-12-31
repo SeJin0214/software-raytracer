@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <assert.h>
 #include "cone.h"
 
 void	update_scale_diameter_cone(void* obj, \
@@ -25,6 +26,10 @@ const t_action action)
 	{
 		cone->diameter = fmaxf(cone->diameter - 0.5f, 0.5f);
 	}
+	else
+	{
+		assert(!"invalid action in update_scale_diameter_cone");
+	}
 }
 
 void	update_scale_height_cone(void* obj, \
@@ -39,5 +44,9 @@ const t_action action)
 	else if (action == ACTION_OBJECT_HEIGHT_SCALE_DOWN)
 	{
 		cone->height = fmaxf(cone->height - 0.5f, 0.5f);
+	}
+	else
+	{
+		assert(!"invalid action in update_scale_height_cone");
 	}
 }

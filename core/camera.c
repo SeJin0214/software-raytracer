@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <assert.h>
 #include "world.h"
 #include "quaternion.h"
 #include "solid_shape.h"
@@ -46,6 +47,8 @@ void	move_camera(t_camera* camera, const t_action action)
 	else if (action == ACTION_CAMERA_MOVE_BACK)
 		camera->coordinates = subtract_vector3(camera->coordinates, \
 		camera->local_basis.row[Z]);
+	else
+		assert(!"invalid action in move_camera");
 }
 
 void	rotate_camera(t_camera* camera, const t_action action)
@@ -65,6 +68,11 @@ void	rotate_camera(t_camera* camera, const t_action action)
 		q_delta = get_rotation_quaternion(camera->local_basis.row[Z], 5);
 	else if (action == ACTION_Z_AXIS_ROTATING_CAMERA_COUNTERCLOCKWISE)
 		q_delta = get_rotation_quaternion(camera->local_basis.row[Z], -5);
+	else
+	{
+		assert(!"invalid action in rotate_camera");
+		return;
+	}
 	camera->local_basis = convert_matrix(hamilton_product(current, q_delta));
 	camera->local_basis.row[X] = normalize_vector3(camera->local_basis.row[X]);
 	camera->local_basis.row[Y] = normalize_vector3(camera->local_basis.row[Y]);

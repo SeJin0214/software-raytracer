@@ -61,6 +61,7 @@ const float yaw_degree, const float pitch_degree)
 t_ivector3	compute_reflection_lighting_recursive(const t_world* world, \
 const t_ray ray, const t_hit_record hit_record, size_t depth)
 {
+	(void) depth;
 	t_ivector3 total_color = trace_reflection_color(world, ray, hit_record, depth);
 	const t_ivector3 ambient_color = load_ambient_color(world->ambient_light, hit_record);
 	

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <assert.h>
 #include <math.h>
 #include "cylinder.h"
 
@@ -26,6 +27,10 @@ const t_action action)
 	{
 		cylinder->diameter = fmaxf(cylinder->diameter - 0.5f, 0.5f);
 	}
+	else
+	{
+		assert(!"invalid action in update_scale_diameter_cylinder");
+	}
 }
 
 void	update_scale_height_cylinder(void* obj, \
@@ -40,5 +45,9 @@ const t_action action)
 	else if (action == ACTION_OBJECT_HEIGHT_SCALE_DOWN)
 	{
 		cylinder->height = fmaxf(cylinder->height - 0.5f, 0.5f);
+	}
+	else
+	{
+		assert(!"invalid action in update_scale_height_cylinder");
 	}
 }
