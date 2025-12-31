@@ -57,7 +57,7 @@ sudo apt update
 sudo apt install libbsd-dev  
 
 #### 누수 확인  
-valgrind --leak=check=full ./miniRT scene.rt (매우 느림)  
+valgrind --leak=check=full ./RT scene.rt (매우 느림)  
 
 valgrind 없는 경우  
 sudo apt install valgrind  

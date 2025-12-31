@@ -1,13 +1,14 @@
 
 
 ## 환경  
-1. 운영체제       : Ubuntu 22.04.3 LTS  
-2. 언어 : C  
-3. 빌드    : makefile
-4. 라이브러리 : MiniLibX
-6. 코딩 표준 : 42 norminette    
-             함수 25줄 이하  
-             한 라인 길이 80이하  
+1. CPU : 13th Gen Intel(R) Core(TM) i7-13700
+2. RAM : 16GB
+3. 운영체제       : Ubuntu 22.04.3 LTS  
+4. 언어 : C  
+5. 빌드    : makefile
+6. 라이브러리 : MiniLibX
+
+
 
 ## 요구사항  
 1. 허용 함수 및 라이브러리 목록  
