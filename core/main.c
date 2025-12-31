@@ -94,3 +94,4 @@ void	render_multi_thread(t_world* world, t_canvas* canvas)
 	}
 	mlx_put_image_to_window(canvas->xvar, canvas->win, canvas->img, 0, 0);
 }
+
