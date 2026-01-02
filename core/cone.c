@@ -15,6 +15,45 @@
 #include "hit_cylinder.h"
 #include "ft_math.h"
 
+static t_vtable cone_table = 
+{ 
+	.is_hit = is_hit_cone, 
+	.get_uv_coordinate = get_uv_coordinate_in_cone,
+	.delete = delete_cone, 
+	.scale_height = update_scale_height_cone,
+	.scale_diameter = update_scale_diameter_cone, 
+};
+
+void	init_cone(t_cone* out_cone, const t_vector3 coordinates, \
+const t_ivector3 colors, const t_vector3 direction, const t_image texture, const float diameter, const float height)
+{
+	t_shape shape;
+	init_shape(&shape, coordinates, colors, get_local_basis(direction), texture, &cone_table);
+	out_cone->shape = shape;
+	out_cone->diameter = diameter;
+	out_cone->height = height;
+}
+
+// t_cone*	copy_construction_to_cone(const t_cone cone)
+// {
+// 	t_cone*	result = malloc(sizeof(t_cone));
+
+// 	result->shape = cone.shape;
+// 	result->shape.is_hit = is_hit_cone;
+// 	result->shape.delete = delete_cone;
+// 	result->shape.get_uv_coordinate = get_uv_coordinate_in_cone;
+// 	result->shape.scale_diameter = update_scale_diameter_cone;
+// 	result->shape.scale_height = update_scale_height_cone;
+// 	result->diameter = cone.diameter;
+// 	result->height = cone.height;
+// 	return (result);
+// }
+
+void	delete_cone(void* obj)
+{
+	free(obj);
+}
+
 extern inline bool		is_hit_down_cap_in_cone(const t_ray ray, \
 const t_cone* cone, const t_vector3 down_c, t_hit_record* out);
 
@@ -46,26 +85,6 @@ const t_vector3 hit_point)
 	return (uv);
 }
 
-t_cone*	copy_construction_to_cone(const t_cone cone)
-{
-	t_cone*	result = malloc(sizeof(t_cone));
-
-	result->shape = cone.shape;
-	result->shape.is_hit = is_hit_cone;
-	result->shape.delete = delete_cone;
-	result->shape.get_uv_coordinate = get_uv_coordinate_in_cone;
-	result->shape.scale_diameter = update_scale_diameter_cone;
-	result->shape.scale_height = update_scale_height_cone;
-	result->diameter = cone.diameter;
-	result->height = cone.height;
-	return (result);
-}
-
-void	delete_cone(void* obj)
-{
-	free(obj);
-}
-
 bool	is_hit_cone(const t_ray ray, \
 const void* obj, t_hit_record* out)
 {
@@ -94,3 +113,4 @@ const void* obj, t_hit_record* out)
 	out->object = (void *)co;
 	return (true);
 }
+

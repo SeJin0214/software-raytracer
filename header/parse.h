@@ -89,11 +89,8 @@ bool	try_parse_attributes(const char** attributes, t_world* out_world, t_canvas*
 /* parse_solid_shape.c */
 bool	try_add_sphere_to_world(const char** attributes, t_world* world);
 bool	try_add_plane_to_world(const char** attributes, t_world* world);
-bool	is_invalid_value_in_plane(const char** attributes, t_plane* plane);
 bool	try_add_cylinder_to_world(const char** attributes, t_world* world);
-bool	is_invalid_value_in_cylinder(const char** attributes, t_cylinder* cylinder);
 bool	try_add_cone_to_world(const char** attributes, t_world* world);
-bool	is_invalid_value_in_cone(const char** attributes, t_cone* cone);
 
 /* parse_util.c */
 bool	try_parse_vector3(const char* attribute, t_vector3* out_result);

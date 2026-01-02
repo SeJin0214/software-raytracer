@@ -28,7 +28,7 @@
 
 int	main(int argc, const char** argv)
 {
-	printf("shape sizeof = %ld\n", sizeof(t_solid_shape));
+	printf("shape sizeof = %ld\n", sizeof(t_shape));
 	t_world		world;
 	t_canvas	canvas;
 	t_input		input;

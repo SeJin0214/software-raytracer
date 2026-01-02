@@ -16,11 +16,12 @@
 
 typedef struct s_plane
 {
-	t_solid_shape	shape;
+	t_shape	shape;
 }	t_plane;
 
 /* plane.c */
-t_plane		*copy_construction_to_plane(const t_plane plane);
+void	init_plane(t_plane* plane, const t_vector3 coordinates, \
+	const t_ivector3 colors, const t_vector3 direction, const t_image texture);
 void		delete_plane(void* obj);
 bool		is_hit_plane(const t_ray ray, const void* plane, t_hit_record* out);
 t_vector2	get_uv_coordinate_in_plane(const void* plane, const t_vector3 hit_point);

@@ -24,9 +24,9 @@ const t_vector3 surface, void* object)
 	t_hit_record hit_record = get_hit_record();
 
 	size_t i = 0;
-	while (i < world->solid_shapes.count)
+	while (i < world->shapes.count)
 	{
-		t_solid_shape** shape = get_element_or_null_in_list((t_array_list *)(&world->solid_shapes), i);
+		t_shape** shape = get_element_or_null_in_list((t_array_list *)(&world->shapes), i);
 		++i;
 
 		if (object == *shape)
@@ -34,7 +34,7 @@ const t_vector3 surface, void* object)
 			continue;
 		}
 
-		if ((*shape)->is_hit(light_ray, *shape, &hit_record))
+		if ((*shape)->vtable->is_hit(light_ray, *shape, &hit_record))
 		{
 			const float hitpoint_to_light_length = get_length_squared(subtract_vector3(hit_record.point, light.coordinates));
 			if (surface_to_light_length > hitpoint_to_light_length)

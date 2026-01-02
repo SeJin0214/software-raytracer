@@ -27,7 +27,7 @@ typedef struct s_world
 	t_ambient_light	ambient_light;
 	bool			is_valid_ambient_light;
 	t_array_list	lights;
-	t_array_list	solid_shapes;
+	t_array_list	shapes;
 	size_t			current_object_index;
 	size_t			current_light_index;
 	t_image			texture;

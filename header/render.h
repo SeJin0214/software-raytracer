@@ -33,10 +33,10 @@ inline t_hit_record	load_hit_record(const t_world* world, const t_ray ray)
 {
 	size_t i = 0;
 	t_hit_record hit_record = get_hit_record();
-	while (i < world->solid_shapes.count)
+	while (i < world->shapes.count)
 	{
-		t_solid_shape** shape = get_element_or_null_in_list((t_array_list *)(&world->solid_shapes), i);
-		(*shape)->is_hit(ray, *shape, &hit_record);
+		t_shape** shape = get_element_or_null_in_list((t_array_list *)(&world->shapes), i);
+		(*shape)->vtable->is_hit(ray, *shape, &hit_record);
 		++i;
 	}
 	return (hit_record);

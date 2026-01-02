@@ -17,7 +17,7 @@
 
 typedef struct s_cylinder
 {
-	t_solid_shape	shape;
+	t_shape	shape;
 	float			diameter;
 	float			height;
 }	t_cylinder;
@@ -27,7 +27,8 @@ void		update_scale_diameter_cylinder(void* cylinder, const t_action action);
 void		update_scale_height_cylinder(void* cylinder, const t_action action);
 
 /* cylinder_object.c */
-t_cylinder*	copy_construction_to_cylinder(const t_cylinder cylinder);
+void		init_cylinder(t_cylinder* out_cylinder, const t_vector3 coordinates, \
+	const t_ivector3 colors, const t_vector3 direction, const t_image texture, const float diameter, const float height);
 void		delete_cylinder(void* obj);
 t_vector2	get_uv_coordinate_in_cylinder(const void* cylinder, const t_vector3 hit_point);
 

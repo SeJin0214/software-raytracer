@@ -31,7 +31,7 @@ bool	init_world(t_world* world, t_canvas* canvas)
 	world->current_object_index = 0;
 	world->current_light_index = 0;
 
-	init_array_list(&world->solid_shapes, sizeof(t_solid_shape *));
+	init_array_list(&world->shapes, sizeof(t_shape *));
 	init_array_list(&world->lights, sizeof(t_light));
 	return (world->texture.image != NULL);
 }
@@ -42,7 +42,7 @@ void	destroy_world(t_world* world, t_canvas* canvas)
 	{
 		mlx_destroy_image(canvas->xvar, world->texture.image);
 	}
-	destroy_shapes(&world->solid_shapes);
+	destroy_shapes(&world->shapes);
 	world->lights.destroy(&world->lights, do_nothing);
 }
 

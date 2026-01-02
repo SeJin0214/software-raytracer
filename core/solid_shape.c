@@ -20,37 +20,44 @@
 #include "solid_shape_getter.h"
 #include "vector.h"
 #include "quaternion.h"
+#include "vtable.h"
+
+void		init_shape(t_shape* out_shape, const t_vector3 coordinates, const t_ivector3 colors, \
+	const t_matrix3x3 local_basis, const t_image texture, const t_vtable* vtable)
+{
+	out_shape->coordinates = coordinates;
+	out_shape->colors = colors;
+	out_shape->local_basis = local_basis;
+	out_shape->texture = texture;
+	out_shape->vtable = vtable;
+	out_shape->texture_type = TEXTURE_BASIC;
+	out_shape->checkerboard_scale = 10;
+}
 
 void	move_shape(void* obj, const t_action action)
 {
-	t_solid_shape* shape = obj;
+	t_shape* shape = obj;
 
 	if (action == ACTION_OBJECT_MOVE_UP)
-		shape->coordinates = add_vector3(shape->coordinates, \
-		shape->local_basis.row[Y]);
+		shape->coordinates = add_vector3(shape->coordinates, shape->local_basis.row[Y]);
 	else if (action == ACTION_OBJECT_MOVE_DOWN)
-		shape->coordinates = subtract_vector3(shape->coordinates, \
-		shape->local_basis.row[Y]);
+		shape->coordinates = subtract_vector3(shape->coordinates, shape->local_basis.row[Y]);
 	else if (action == ACTION_OBJECT_MOVE_LEFT)
-		shape->coordinates = subtract_vector3(shape->coordinates, \
-		shape->local_basis.row[X]);
+		shape->coordinates = subtract_vector3(shape->coordinates, shape->local_basis.row[X]);
 	else if (action == ACTION_OBJECT_MOVE_RIGHT)
-		shape->coordinates = add_vector3(shape->coordinates, \
-		shape->local_basis.row[X]);
+		shape->coordinates = add_vector3(shape->coordinates, shape->local_basis.row[X]);
 	else if (action == ACTION_OBJECT_MOVE_FRONT)
-		shape->coordinates = add_vector3(shape->coordinates, \
-		shape->local_basis.row[Z]);
+		shape->coordinates = add_vector3(shape->coordinates, shape->local_basis.row[Z]);
 	else if (action == ACTION_OBJECT_MOVE_BACK)
-		shape->coordinates = subtract_vector3(shape->coordinates, \
-		shape->local_basis.row[Z]);
+		shape->coordinates = subtract_vector3(shape->coordinates, shape->local_basis.row[Z]);
 	else
 		assert(!"invalid action in move_shape");
 }
 
 void	rotate_shape(void* obj, const t_action action)
 {
-	t_solid_shape*	shape = obj;
-	t_quaternion	q_delta;
+	t_shape* shape = obj;
+	t_quaternion q_delta;
 
 	t_quaternion current = convert_quaternion(shape->local_basis);
 	if (action == ACTION_X_AXIS_ROTATING_OBJECT_CLOCKWISE)
@@ -78,7 +85,7 @@ void	rotate_shape(void* obj, const t_action action)
 
 void	set_texcture(void* obj, const t_action action)
 {
-	t_solid_shape* shape = obj;
+	t_shape* shape = obj;
 
 	if (action == ACTION_CHANGE_TEXTURE_BASIC)
 	{
@@ -118,8 +125,8 @@ void	destroy_shapes(t_array_list *list)
 	size_t i = 0;
 	while (i < list->count)
 	{
-		t_solid_shape** shape = list->get_element_or_null(list, i);
-		(*shape)->delete((*shape));
+		t_shape** shape = list->get_element_or_null(list, i);
+		(*shape)->vtable->delete((*shape));
 		++i;
 	}
 	free(list->list);

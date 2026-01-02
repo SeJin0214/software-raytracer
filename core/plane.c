@@ -14,19 +14,36 @@
 #include "plane.h"
 #include "solid_shape_getter.h"
 
-t_plane	*copy_construction_to_plane(const t_plane plane)
-{
-	t_plane	*result;
+static t_vtable plane_table = 
+{ 
+	.is_hit = is_hit_plane, 
+	.get_uv_coordinate = get_uv_coordinate_in_plane,
+	.delete = delete_plane, 
+	.scale_height = update_scale_height_plane,
+	.scale_diameter = update_scale_diameter_plane, 
+};
 
-	result = malloc(sizeof(t_plane));
-	result->shape = plane.shape;
-	result->shape.is_hit = is_hit_plane;
-	result->shape.delete = delete_plane;
-	result->shape.get_uv_coordinate = get_uv_coordinate_in_plane;
-	result->shape.scale_diameter = update_scale_diameter_plane;
-	result->shape.scale_height = update_scale_height_plane;
-	return (result);
+void	init_plane(t_plane* plane, const t_vector3 coordinates, \
+	const t_ivector3 colors, const t_vector3 direction, const t_image texture)
+{
+	t_shape shape;
+	init_shape(&shape, coordinates, colors, get_local_basis(direction), texture, &plane_table);
+	plane->shape = shape;
 }
+
+// t_plane	*copy_construction_to_plane(const t_plane plane)
+// {
+// 	t_plane	*result;
+
+// 	result = malloc(sizeof(t_plane));
+// 	result->shape = plane.shape;
+// 	result->shape.is_hit = is_hit_plane;
+// 	result->shape.delete = delete_plane;
+// 	result->shape.get_uv_coordinate = get_uv_coordinate_in_plane;
+// 	result->shape.scale_diameter = update_scale_diameter_plane;
+// 	result->shape.scale_height = update_scale_height_plane;
+// 	return (result);
+// }
 
 void	delete_plane(void* obj)
 {

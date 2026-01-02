@@ -17,7 +17,7 @@
 
 typedef struct s_cone
 {
-	t_solid_shape	shape;
+	t_shape	shape;
 	float			diameter;
 	float			height;
 }	t_cone;
@@ -25,7 +25,8 @@ typedef struct s_cone
 /* cone.c */
 bool		is_hit_cone(const t_ray ray, const void* obj, t_hit_record* out);
 t_vector2	get_uv_coordinate_in_cone(const void* cone, const t_vector3 hit_point);
-t_cone*		copy_construction_to_cone(const t_cone cone);
+void		init_cone(t_cone* out_cone, const t_vector3 coordinates, \
+	const t_ivector3 colors, const t_vector3 direction, const t_image texture, const float diameter, const float height);
 void		delete_cone(void* obj);
 
 

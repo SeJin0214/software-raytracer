@@ -20,6 +20,7 @@
 # include "array_list.h"
 # include "matrix.h"
 # include "image.h"
+# include "vtable.h"
 
 typedef struct s_world	t_world;
 
@@ -36,16 +37,14 @@ typedef struct s_solid_shape
 	t_ivector3	colors;
 	t_matrix3x3	local_basis;
 	t_texture	texture_type;
-	t_image		texture;
 	float		checkerboard_scale;
-	bool		(*is_hit)(const t_ray, const void *, t_hit_record *);
-	t_vector2	(*get_uv_coordinate)(const void *, const t_vector3 hit_point);
-	void		(*delete)(void *);
-	void		(*scale_height)(void *, const t_action);
-	void		(*scale_diameter)(void *, const t_action);
-}	t_solid_shape;
+	t_image		texture;
+	const t_vtable*	vtable;
+}	t_shape;
 
 /* solid_shape.c */
+void		init_shape(t_shape* out_shape, const t_vector3 coordinates, const t_ivector3 colors, const t_matrix3x3 local_basis, \
+	const t_image texture, const t_vtable* vtable);
 void		move_shape(void* obj, const t_action action);
 void		rotate_shape(void* obj, const t_action action);
 void		set_texcture(void* obj, const t_action action);

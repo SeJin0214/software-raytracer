@@ -16,28 +16,27 @@
 #include "sphere.h"
 #include "equation.h"
 #include "render.h"
+#include "vtable.h"
+
+static const t_vtable sphere_table = 
+{ 
+	.is_hit = is_hit_sphere, 
+	.get_uv_coordinate = get_uv_coordinate_in_sphere,
+	.delete = delete_sphere, 
+	.scale_height = update_scale_height_sphere,
+	.scale_diameter = update_scale_diameter_sphere, 
+};
 
 extern inline void		set_hit_record_by_sphere(t_hit_record* out, \
 const float solution, const t_ray ray, const t_sphere* sphere);
 
-t_sphere*	init_construction_to_sphere(const t_sphere sphere, t_world* world)
+void	init_sphere(t_sphere* out_sphere, const t_vector3 coordinates, \
+	const t_ivector3 colors, const t_image texture, const float diameter)
 {
-	t_sphere*	result;
-
-	result = malloc(sizeof(t_sphere));
-	result->shape = sphere.shape;
-	result->shape.local_basis = \
-	get_local_basis((t_vector3){{0.0f, 0.0f, 1.0f}});
-	result->shape.texture_type = TEXTURE_BASIC;
-	result->shape.texture = world->texture;
-	result->shape.checkerboard_scale = 10;
-	result->shape.is_hit = is_hit_sphere;
-	result->shape.delete = delete_sphere;
-	result->shape.get_uv_coordinate = get_uv_coordinate_in_sphere;
-	result->shape.scale_diameter = update_scale_diameter_sphere;
-	result->shape.scale_height = update_scale_height_sphere;
-	result->diameter = sphere.diameter;
-	return (result);
+	t_shape shape;
+	init_shape(&shape, coordinates, colors, get_local_basis((t_vector3){{0.0f, 0.0f, 1.0f}}), texture, &sphere_table);
+	out_sphere->shape = shape;
+	out_sphere->diameter = diameter;
 }
 
 void	delete_sphere(void* obj)

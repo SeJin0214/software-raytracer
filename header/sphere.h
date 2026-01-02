@@ -18,12 +18,13 @@
 
 typedef struct s_sphere
 {
-	t_solid_shape	shape;
+	t_shape	shape;
 	float			diameter;
 }	t_sphere;
 
 /* sphere.c */
-t_sphere*	init_construction_to_sphere(const t_sphere sphere, t_world* world);
+void	init_sphere(t_sphere* out_sphere, const t_vector3 coordinates, \
+	const t_ivector3 colors, const t_image texture, const float diameter);
 void		delete_sphere(void* obj);
 bool		is_hit_sphere(const t_ray ray, const void* sphere, t_hit_record* out);
 t_vector2	get_uv_coordinate_in_sphere(const void* sphere, const t_vector3 hit_point);

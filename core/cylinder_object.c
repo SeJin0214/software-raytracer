@@ -17,19 +17,23 @@
 #include "equation.h"
 #include "solid_shape_getter.h"
 
+static t_vtable cylinder_table = 
+{ 
+	.is_hit = is_hit_cylinder, 
+	.get_uv_coordinate = get_uv_coordinate_in_cylinder,
+	.delete = delete_cylinder, 
+	.scale_height = update_scale_height_cylinder,
+	.scale_diameter = update_scale_diameter_cylinder, 
+};
 
-t_cylinder*	copy_construction_to_cylinder(const t_cylinder cylinder)
+void	init_cylinder(t_cylinder* out_cylinder, const t_vector3 coordinates, \
+	const t_ivector3 colors, const t_vector3 direction, const t_image texture, const float diameter, const float height)
 {
-	t_cylinder*	result = malloc(sizeof(t_cylinder));
-	result->shape = cylinder.shape;
-	result->shape.is_hit = is_hit_cylinder;
-	result->shape.delete = delete_cylinder;
-	result->shape.get_uv_coordinate = get_uv_coordinate_in_cylinder;
-	result->shape.scale_diameter = update_scale_diameter_cylinder;
-	result->shape.scale_height = update_scale_height_cylinder;
-	result->diameter = cylinder.diameter;
-	result->height = cylinder.height;
-	return (result);
+	t_shape shape;
+	init_shape(&shape, coordinates, colors, get_local_basis(direction), texture, &cylinder_table);
+	out_cylinder->shape = shape;
+	out_cylinder->diameter = diameter;
+	out_cylinder->height = height;
 }
 
 void	delete_cylinder(void* obj)

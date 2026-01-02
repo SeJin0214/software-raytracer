@@ -18,8 +18,8 @@
 inline t_ivector3	get_checkerboard_color_at_hit_point(\
 const void *shape, const t_vector3 hit_point)
 {
-	const t_solid_shape*	sh = shape;
-	const t_vector2			uv = sh->get_uv_coordinate(sh, hit_point);
+	const t_shape*	sh = shape;
+	const t_vector2			uv = sh->vtable->get_uv_coordinate(sh, hit_point);
 
 	if ((int)floorf((uv.x * sh->checkerboard_scale) \
 	+ (int)floorf(uv.y * sh->checkerboard_scale)) % 2 == 0)
@@ -31,7 +31,7 @@ const void *shape, const t_vector3 hit_point)
 
 inline t_ivector3	get_texel_color(const void *shape, int x, int y)
 {
-	const t_solid_shape*	sh = shape;
+	const t_shape*	sh = shape;
 	const int				offset = sh->texture.width * y + x;
 	int*					image_frame_buffer;
 	int						color;
@@ -48,8 +48,8 @@ inline t_ivector3	get_texel_color(const void *shape, int x, int y)
 inline t_ivector3	get_image_color_at_hit_point(\
 const void *shape, const t_vector3 hit_point)
 {
-	const t_solid_shape*	sh = shape;
-	const t_vector2			uv = sh->get_uv_coordinate(sh, hit_point);
+	const t_shape*	sh = shape;
+	const t_vector2			uv = sh->vtable->get_uv_coordinate(sh, hit_point);
 	const int				x = uv.x * sh->texture.width;
 	const int				y = uv.y * sh->texture.height;
 
@@ -59,7 +59,7 @@ const void *shape, const t_vector3 hit_point)
 inline t_ivector3	get_color_at_hit_point(const void *shape, \
 const t_vector3 hit_point)
 {
-	const t_solid_shape*	sh = shape;
+	const t_shape*	sh = shape;
 
 	if (sh->texture_type == TEXTURE_BASIC)
 	{
@@ -105,7 +105,7 @@ int x, int y)
 inline t_vector3	get_normal_at_hit_point(const void *shape, \
 const t_vector3 n, const t_vector3 hit_point)
 {
-	const t_solid_shape*	sh = (t_solid_shape *)shape;
+	const t_shape*	sh = (t_shape *)shape;
 	t_vector2				uv;
 	t_ivector2				xy;
 
@@ -116,7 +116,7 @@ const t_vector3 n, const t_vector3 hit_point)
 	}
 	else if (sh->texture_type == TEXTURE_IMAGE)
 	{
-		uv = sh->get_uv_coordinate(sh, hit_point);
+		uv = sh->vtable->get_uv_coordinate(sh, hit_point);
 		xy.x = uv.x * sh->texture.width;
 		xy.y = uv.y * sh->texture.height;
 		return (get_bump_normal(shape, n, xy.x, xy.y));
